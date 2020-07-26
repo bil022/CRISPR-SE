@@ -2,41 +2,9 @@
 
 Option opt;
 
-/*
-#ifdef CREST
-#define DS_LESS(ds) (ds<2)
-#define SG_LESS(ds, dd) (((ds<<1)+dd)<4)
-#else
-#define DS_LESS(ds) (ds<mm)
-#define SG_LESS(ds, dd) ((ds+dd)<mm)
-#endif
-*/
 #define DS_LESS(ds) ((ds<<sw)<mm)
 #define SG_LESS(ds, dd) (((ds<<sw)+dd)<mm)
 
-/*
-inline uint32_t udist0(uint32_t a, uint32_t b) {
-	uint32_t diff=a^b, ret=0;
-	diff&=MASK;
-	while (diff) {
-		if (diff&3)
-		ret++;
-		diff>>=2;
-	}
-	return ret;
-}
-
-void bin(unsigned n, int len=0)
-{
-	if (n > 1)
-	bin(n/2, len+1);
-	cout << n % 2;
-	if (!len)
-	cout << "\n";
-}
-*/
-
-// https://codingforspeed.com/a-faster-approach-to-count-set-bits-in-a-32-bit-integer/
 inline uint32_t udist(uint32_t a, uint32_t b) {
 	uint32_t i=a^b;
 	i&=MASK;
@@ -49,8 +17,7 @@ inline uint32_t udist(uint32_t a, uint32_t b) {
 	return i & 0x3f;
 }
 
-CrisprSE SE; // query, ref_se;
-
+CrisprSE SE;
 pthread_mutex_t mtx;
 
 #define BUF_SIZE 128
@@ -114,7 +81,6 @@ public:
 		return false;
 	}
 	inline void next() { offset+=blk_size; }
-	// inline size_t blk_len() { seed=ptr[offset++]; ; return blk_size; }
 	inline uint32_t distal_val(size_t off) { distal=ptr[offset+off]; return distal; }
 	inline void mark(uint32_t off) { ptr[offset+off]|=OFFTGT; }
 	inline void dump() {
@@ -248,7 +214,8 @@ void build() {
 			int64_t rid, key=(((int64_t)curr_seed)<<CRISPR_LEN)|curr_distal;
 			while (getline(ref_fs, ln)) {
 				ASSERT(!ref_fs.fail());
-				int ret=sscanf(ln.c_str(), "%llx", &rid); ASSERT(ret==1);
+				int ret=sscanf(ln.c_str(), "%llx", &rid);
+                assert(ret==1);
 				assert(key>=rid);
 				if (key==rid)
 				break;

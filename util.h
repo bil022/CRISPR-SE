@@ -28,19 +28,16 @@ public:
 	Timer() { reset(); }
 	double tick(const char* msg) {
 		double ret=0;
-#ifndef __MACH__
+		clock_gettime(CLOCK_REALTIME, &end_);
 		clock_gettime(CLOCK_REALTIME, &end_);
 		ret=end_.tv_sec - beg_.tv_sec +
 		(end_.tv_nsec - beg_.tv_nsec) / 1000000000.;
 		fprintf(stderr, "%s: %lf\n", msg, ret);
 		reset();
-#endif
 		return ret;
 	}
 	void reset() {
-#ifndef __MACH__
 		clock_gettime(CLOCK_REALTIME, &beg_);
-#endif
 	}
 	
 private:

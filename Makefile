@@ -1,22 +1,17 @@
-CC=g++
-
-FLAGS=-lpthread -std=gnu++11 -Wall
+FLAGS=-lpthread -Wall
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	FLAGS+= -static
+	FLAGS+= -static -lrt
 endif
 
-SRC = pair.cc CREST.cc CrisprDB.cc
-DEPS = CREST.h util.h
-OBJ = pair.o CREST.o CrisprDB.o
-
-se: $(OBJ)
-	$(CC) -o $@ $^ $(FLAGS)
-
-se-regex: $(OBJ)
-	$(CC) -o $@ $^ $(FLAGS) -lpcre2-8
-
-ref=../ref/hg38_chrM
-test:
-	./crest -p 4 -r $(ref)
-	(cat $(ref).h; sort -T. -k3,3 -k4,4n $(ref).mm4) | samtools view -Sb - > $(ref).bam
+all:
+	g++ *.cc -o se $(FLAGS)
+debug:
+	g++ *.cc -o ../seD -DDEBUG -g -pg $(FLAGS)
+index:
+	./se --index -r ecoli
+build:
+	./se --build -r ecoli
+gz:
+	echo tar -cvzf CRISPR-SE.tgz CRISPR-SE
+	echo "pwd | mail -s CRISPR-SE -a CRISPR-SE.tgz bil022@ucsd.edu"
