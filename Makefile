@@ -20,6 +20,3 @@ ref=../ref/hg38_chrM
 test:
 	./crest -p 4 -r $(ref)
 	(cat $(ref).h; sort -T. -k3,3 -k4,4n $(ref).mm4) | samtools view -Sb - > $(ref).bam
-
-all:
-	@echo $(FLAGS)
