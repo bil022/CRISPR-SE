@@ -45,14 +45,14 @@ public:
     Crispr_t(bool reversed, size_t chr, uint32_t pos) {
         many=0;
         if (reversed) this->reversed=1; else this->reversed=0;
-        assert(chr<32); assert(pos<256000000);
+        // assert(chr<32); assert(pos<256000000);
         this->chr=chr;
         this->pos=pos;
     }
     uint64_t reversed:1;
     uint64_t many:1;
-    uint64_t chr:5; // max 32 chrosomes
-    uint64_t pos:28; // max 256M bp
+    uint64_t chr:16; // max 64K chrosomes
+    uint64_t pos:32; // max 4G bp
 };
 
 //extern map<int64_t, Crispr_t> db;
@@ -206,10 +206,10 @@ public:
             assert(seq[26]=='G');
         }
         
-        return eval(seq);
+        return doench(seq);
     }
 private:
-    static float eval(string& seq) {
+    static float doench(string& seq) {
         float intercept =  0.59763615;
         float gcHigh    = -0.1665878;
         float gcLow     = -0.2026259;

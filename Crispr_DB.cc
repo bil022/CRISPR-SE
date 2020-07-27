@@ -6,6 +6,7 @@ void CrisprDB::loadRef() {
     
     string fa_file=opt.refFile(".fa");
     fstream ifs(fa_file.c_str());
+    
     string ln, chr, seq;
     while (getline(ifs, ln)) {
         if (ln.length() && ln[0]=='>') {
@@ -81,12 +82,12 @@ void CrisprDB::scanNGG(string& chr, string& seq) {
     assert(seq.size()<(1<<28));
 #endif
     
-    unsigned long end=seq.size()-1;
+    size_t tail=seq.size()-1;
     int pos=0, fwds=0,revs=0;
     bool reversed;
     char ptr[24];
     ptr[CRISPR_LEN]='\0';
-    for (int i=0; i<end; i++) {
+    for (size_t i=0; i<tail; i++) {
         char gc=seq[i];
         if (gc=='G' && seq[i+1]==gc) {
             if (i<21) continue;
@@ -183,8 +184,8 @@ void CrisprDB::sam(FILE*fp, int64_t key, Crispr_t c, int qual, float efficiency)
     strncpy(rev, ngg, CRISPR_LEN); rev[CRISPR_LEN]='\0';
     if (c.reversed)
         revcomp(rev);
-    fprintf(fp, "%llx:%s\t%d\t%s\t%d\t%d\t%dM\t*\t0\t0\t%s\t%s\tEF:f:%f\n",
-            key, ngg, c.reversed?16:0, chrOf[c.chr].c_str(), c.pos+1, qual, CRISPR_LEN, rev, CRISPR_QUAL, efficiency);
+    fprintf(fp, "%" PRId64 ":%s\t%d\t%s\t%d\t%d\t%dM\t*\t0\t0\t%s\t%s\tEF:f:%f\n",
+            key, ngg, c.reversed?16:0, chrOf[c.chr].c_str(), (int)(c.pos+1), qual, CRISPR_LEN, rev, CRISPR_QUAL, efficiency);
 }
 
 void CrisprDB::outputIdx(FILE* fp, size_t key, vector<uint32_t>& lst) {

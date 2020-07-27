@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <cmath>
 #include <getopt.h>
+#include <inttypes.h>
 
 using namespace std;
 extern pthread_mutex_t mtx;

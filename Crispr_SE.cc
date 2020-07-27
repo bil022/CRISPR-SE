@@ -95,7 +95,7 @@ public:
 
 void seRunner(long tid) {
     int nThreads=opt.threads;
-    int mm=opt.maxMismatch, sw=opt.seed_weight;
+    uint32_t mm=opt.maxMismatch, sw=opt.seed_weight;
     bool verbose=opt.verbose;
     
     SE_Iter ref_itr, query_itr(tid);
@@ -214,7 +214,7 @@ void build() {
             int64_t rid, key=(((int64_t)curr_seed)<<CRISPR_LEN)|curr_distal;
             while (getline(ref_fs, ln)) {
                 ASSERT(!ref_fs.fail());
-                int ret=sscanf(ln.c_str(), "%llx", &rid);
+                int ret=sscanf(ln.c_str(), "%" PRId64 "", &rid);
                 assert(ret==1);
                 assert(key>=rid);
                 if (key==rid)
@@ -256,7 +256,7 @@ void dump(vector<uint32_t>& idx, string& gRNA) {
 int main(int argc, const char * argv[]) {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
+
     int task=opt.parse(argc, argv);
     
     switch (task) {
