@@ -15,5 +15,3 @@ build:
 gz:
 	echo tar -cvzf CRISPR-SE.tgz CRISPR-SE
 	echo "pwd | mail -s CRISPR-SE -a CRISPR-SE.tgz bil022@ucsd.edu"
-s:
-	rsync -av *.cc *.h Makefile silencer.sdsc.edu:src/CRISPR-SE/.	

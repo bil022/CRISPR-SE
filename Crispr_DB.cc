@@ -184,7 +184,7 @@ void CrisprDB::sam(FILE*fp, int64_t key, Crispr_t c, int qual, float efficiency)
     strncpy(rev, ngg, CRISPR_LEN); rev[CRISPR_LEN]='\0';
     if (c.reversed)
         revcomp(rev);
-    fprintf(fp, "%" PRId64 ":%s\t%d\t%s\t%d\t%d\t%dM\t*\t0\t0\t%s\t%s\tEF:f:%f\n",
+    fprintf(fp, "%" PRIx64 ":%s\t%d\t%s\t%d\t%d\t%dM\t*\t0\t0\t%s\t%s\tEF:f:%f\n",
             key, ngg, c.reversed?16:0, chrOf[c.chr].c_str(), (int)(c.pos+1), qual, CRISPR_LEN, rev, CRISPR_QUAL, efficiency);
 }
 

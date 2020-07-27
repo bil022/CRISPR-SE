@@ -214,7 +214,7 @@ void build() {
             int64_t rid, key=(((int64_t)curr_seed)<<CRISPR_LEN)|curr_distal;
             while (getline(ref_fs, ln)) {
                 ASSERT(!ref_fs.fail());
-                int ret=sscanf(ln.c_str(), "%" PRId64 "", &rid);
+                int ret=sscanf(ln.c_str(), "%" PRIx64 "", &rid);
                 assert(ret==1);
                 assert(key>=rid);
                 if (key==rid)
