@@ -1,8 +1,8 @@
 # CRISPR-SE
 ## Input:
 Genome files in fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line.
-```
-head -n 3 simple.fa 
+```bash
+$ head -n 3 simple.fa 
 >simple
 TCTATTTTGTGGTTACTTTG
 GTGGTTACTTTGAGGAGAGT
@@ -10,9 +10,9 @@ CTAAATCAGGATCAGATTCA
 ```
 ## Compile CRISPR-SE
 ```
-cd CRISPR-SE
-make
-./se
+$ cd CRISPR-SE
+$ make
+$ ./se
 Program: Crispr-SE (CRISPR Search Engine)
 Contact:  Bin Li <bil022@ucsd.edu>
 Usage:  Crispr-SE <command> [options]
@@ -34,14 +34,14 @@ Note: if not in verbose mode, the max off-target will be set to 1
 ## Create index
 ```
 # create index for ecoli reference genome
-./se --index -r ecoli
+$ ./se --index -r ecoli
 # create index for simple format
-./se --index -sr simple
+$ ./se --index -sr simple
 ```
 ## Search guide RNAs (gRNAs)
 ```
 # search genome-wide gRNA
-./se --build -r ecoli -p 2
+$ ./se --build -r ecoli -p 2
 # search gRNA in list of gRNAs in simple format
-./se --build -r ecoli -q simple -p 2
+$ ./se --build -r ecoli -q simple -p 2
 ```
