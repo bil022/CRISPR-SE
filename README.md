@@ -38,10 +38,15 @@ $ ./se --index -r ecoli
 # create index for simple format
 $ ./se --index -sr simple
 ```
-## Search guide RNAs (gRNAs)
+## Search gRNAs
 ```
 # search genome-wide gRNA
 $ ./se --build -r ecoli -p 2
+
 # search gRNA in list of gRNAs in simple format
 $ ./se --build -r ecoli -q simple -p 2
+
+# search offtargets (slower)
+$ ./se --build -r ecoli -q simple -p 2 -v
+
 ```
