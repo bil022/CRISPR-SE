@@ -53,6 +53,7 @@ class Option {
     int argc; const char** argv;
 public:
     const char *ref, *query;
+    string PAM;
     int task, threads, seed_weight, maxMismatch, maxOfftarget;
     bool simple, verbose;
     int parse(int argc, const char* argv[]) {
@@ -65,6 +66,7 @@ public:
         simple=false;
         verbose=false;
         maxMismatch=0; // CREST-Seq
+        PAM="NGG";
         seed_weight=0;
         maxOfftarget=1;
         
@@ -78,6 +80,7 @@ public:
             {"simple",  required_argument, 0, 's'},
             {"maxMismatch",  required_argument, 0, 'm'},
             {"maxOfftarget",  required_argument, 0, 'n'},
+            {"PAM", optional_argument, 0, 'P'},
             {"verbose",  no_argument, 0, 'v'},
             {0, 0, 0, 0}
         };
@@ -93,6 +96,7 @@ public:
                 case 'q': query=optarg; break;
                 case 'm': maxMismatch=atoi(optarg); assert(maxMismatch>=0); break;
                 case 'n': maxOfftarget=atoi(optarg); assert(maxMismatch>=0); break;
+                case 'P': PAM=optarg;
                 case 'v': verbose=true; break;
                 case 'h': task=TASK_HELP; break;
                 default: cerr << c << "?\n"; task = TASK_HELP; break;
@@ -104,6 +108,11 @@ public:
             cerr << "reference genome is required\n";
         }
         
+        if (PAM.compare("NGG")!=0 && PAM.compare("NAG")!=0) {
+            task = TASK_HELP;
+            cerr << "Only NGG|NAG is supported\n";
+        }
+
         if (maxMismatch==0) {
             seed_weight=1;
             maxMismatch=4;

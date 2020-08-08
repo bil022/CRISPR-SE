@@ -11,7 +11,7 @@ void CrisprDB::loadRef() {
     while (getline(ifs, ln)) {
         if (ln.length() && ln[0]=='>') {
             if (seq.length()) {
-                scanNGG(chr, seq);
+                scanPAM(chr, seq);
                 header[chr]=seq.size();
                 seq.clear();
             }
@@ -21,7 +21,7 @@ void CrisprDB::loadRef() {
         transform(ln.begin(), ln.end(), ln.begin(), ::toupper);
         seq.append(ln);
     }
-    scanNGG(chr, seq);
+    scanPAM(chr, seq);
     header[chr]=seq.size();
     seq.clear();
     
@@ -75,28 +75,33 @@ void CrisprDB::loadSimple() {
     saveIdx();
 }
 
-void CrisprDB::scanNGG(string& chr, string& seq) {
+void CrisprDB::scanPAM(string& chr, string& seq) {
     assert(chr.size());
 #ifdef DEBUG
     cerr << "Scanning " << chr << " " << seq.size() << " bp" << endl;
     assert(seq.size()<(1<<28));
 #endif
     
-    size_t tail=seq.size()-1;
+    char PAM1='G', PAM2='C';
+    if (opt.PAM.compare("NAG")==0) {
+        PAM1='A'; PAM2='T';
+    }
+
+    size_t ptail=seq.size()-1;
     int pos=0, fwds=0,revs=0;
     bool reversed;
     char ptr[24];
     ptr[CRISPR_LEN]='\0';
-    for (size_t i=0; i<tail; i++) {
-        char gc=seq[i];
-        if (gc=='G' && seq[i+1]==gc) {
+    for (size_t i=0; i<ptail; i++) {
+        char gc=seq[i], gc2=seq[i+1];
+        if (gc=='G' && ((gc2==gc) || (gc2==PAM1))) {
             if (i<21) continue;
             pos=i-21;
             strncpy(ptr, seq.c_str()+pos, CRISPR_LEN);
             if (!good(ptr))
                 continue;
             reversed=false;
-        } else if (gc=='C' && seq[i+1]==gc) {
+        } else if (gc=='C' && ((gc2==gc)||(gc2==PAM2))) {
             pos=i+3;
             strncpy(ptr, seq.c_str()+pos, CRISPR_LEN);
             if (!good(ptr))

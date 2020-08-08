@@ -45,7 +45,7 @@ public:
     Crispr_t(bool reversed, size_t chr, uint32_t pos) {
         many=0;
         if (reversed) this->reversed=1; else this->reversed=0;
-        // assert(chr<32); assert(pos<256000000);
+        //assert(chr<32); assert(pos<256000000);
         this->chr=chr;
         this->pos=pos;
     }
@@ -95,7 +95,7 @@ protected:
     string ref;
     FILE* rep;
     inline void sam(FILE*fp, int64_t key, Crispr_t c, int, float doench);
-    void scanNGG(string& chr, string& seq);
+    void scanPAM(string& chr, string& seq);
     void outputIdx(FILE* fp, size_t key, vector<uint32_t>& lst);
 };
 
