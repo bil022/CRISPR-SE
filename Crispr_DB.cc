@@ -94,7 +94,7 @@ void CrisprDB::scanPAM(string& chr, string& seq) {
     ptr[CRISPR_LEN]='\0';
     for (size_t i=0; i<ptail; i++) {
         char gc=seq[i], gc2=seq[i+1];
-        if (gc=='G' && ((gc2==gc) || (gc2==PAM1))) {
+        if (((gc==gc2) || (gc==PAM1)) && gc2=='G') {
             if (i<21) continue;
             pos=i-21;
             strncpy(ptr, seq.c_str()+pos, CRISPR_LEN);
