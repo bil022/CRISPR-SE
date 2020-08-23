@@ -55,28 +55,27 @@ Note: Reference genome inputs with fasta format are built for both strand. For t
 ./se --build -r ecoli -q simple -p 4 -v
 
 ```
-#### Output:
-Index:
+## Output:
+#### Index:
 ```
 ./se --index -p 4 -r ecoli
 ```
-###### Output:
+
 ```
 ecoli.idx: index file
 ecoli.ref: all unique gRNAs
 ecoli.rep: all repeats
 ecoli.h: header files to be used to generate BAM file
 ```
-###### Build:
+##### Build:
 ```
 ./se --build -p 4 -r ecoli
 ```
-Output:
+
 ```
 ecoli.mm: gRNAs passing off-targets searching criteria 
 ```
 Example:
-
 ```
 ecd6fbc7a4:ACTTGCAGGTGGTCCGAGTG	16	chr6	31132633	30	20M	*	0	0	CACTCGGACCACCTGCAAGT	IIIIIIIIIIIIIIIIIIII
 f1e91a1b9a:TTCTGTCATTCACTTGCAGG	16	chr6	31132644	30	20M	*	0	0	CCTGCAAGTGAATGACAGAA	IIIIIIIIIIIIIIIIIIII
