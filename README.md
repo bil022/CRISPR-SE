@@ -68,9 +68,9 @@ cat simple.h simple.mm | samtools view -Sb - > simple.bam
 #### View results
 For reference genome
 ```
-samtools view ecoli.bam | head
+samtools view ecoli.bam | less
 ```
 For user input simple.fa
 ```
-samtools view ecoli.bam | head
+samtools view ecoli.bam | less
 ```
