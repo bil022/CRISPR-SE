@@ -30,13 +30,12 @@ Options:
 -m INT  Max mismatch, 0 for CREST-Seq, 1+ for #mismatches, default: 0
 -n INT  Max off-target, 0 for all, default: 1
 -v  verbose mode, default: false
-Note: if not in verbose mode, the max off-target will be set to 1
 ```
 ## Create index
 ```
 # create index for ecoli reference genome
 $ ./se --index -r ecoli
-# create index for simple format
+# create index for simple.fa with one gRNA per line
 $ ./se --index -sr simple
 ```
 ## Search gRNAs
