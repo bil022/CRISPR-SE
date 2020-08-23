@@ -39,6 +39,8 @@ Options:
 ```
 ./se --index -r simple -s
 ```
+Note: Reference genome inputs with fasta format are built for both strand. For the inputs in simple format(-s), gRNAs are built with forward strand only.
+
 ## Search gRNAs
 #### Search genome-wide gRNA for ecoli
 ```
@@ -54,23 +56,26 @@ Options:
 
 ```
 #### Output:
-1. Index create four files, for example:
-For an input of ecoli.fa, running: ./se --index -p 4 -r ecoli will generate:
-a) ecoli.idx: index file
-b) ecoli.ref: unique gRNAs
-c) ecoli.rep: gRNA repeats
-d) ecoli.h: header files to be used to generate BAM file from SAM format
-Note: all gRNAs are searched on both strand. For the user input with simple format(-s), gRNAs only use forward strand.
+Index: ./se --index -p 4 -r ecoli
 
-2. Off-target search:
-a) In non-verbose mode, the output use SAM format, the file can be converted into BAM format with the header file, for example:
-Output format:
-ID:gRNA	Strand	Chromosome	Start-pos	30	20M	*	0	0	Reference_sequence	IIIIIIIIIIIIIIIIIIII
+```
+ecoli.idx: index file
+ecoli.ref: all unique gRNAs
+ecoli.rep: all repeats
+ecoli.h: header files to be used to generate BAM file
+```
+Build: ./se --build -p 4 -r ecoli
 
+```
+ecoli.mm: gRNAs passing off-targets searching criteria 
+```
 Example:
+
+```
 ecd6fbc7a4:ACTTGCAGGTGGTCCGAGTG	16	chr6	31132633	30	20M	*	0	0	CACTCGGACCACCTGCAAGT	IIIIIIIIIIIIIIIIIIII
 f1e91a1b9a:TTCTGTCATTCACTTGCAGG	16	chr6	31132644	30	20M	*	0	0	CCTGCAAGTGAATGACAGAA	IIIIIIIIIIIIIIIIIIII
 6cc705b832:TAGAATGTCCAAGCAGAGTC	16	chr6	31132701	30	20M	*	0	0	GACTCTGCTTGGACATTCTA	IIIIIIIIIIIIIIIIIIII
+```
 
 #### Convert into bam format
 For reference genome only
