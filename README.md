@@ -1,7 +1,6 @@
 # CRISPR-SE
-#### Input:
-Genome files in fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line, for example:
-```bash
+CRISPR-SE uses fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line, for example:
+```
 >simple.fa
 TCTATTTTGTGGTTACTTTG
 GTGGTTACTTTGAGGAGAGT
@@ -14,7 +13,7 @@ cd CRISPR-SE
 make
 ./se
 ```
-#### Output
+## Usage
 ```
 Program: Crispr-SE (CRISPR Search Engine)
 Contact:  Bin Li <bil022@ucsd.edu>
