@@ -26,7 +26,7 @@ Options:
   -r STR  reference genome id (mm9, mm10, hg19, hg38, etc)
   -s  The FASTA format is simple format of 20-nt gRNA per line
   -q  The query (user inputs, search reference genome if not set)
-  -m INT  Max mismatch, 0 for CREST-SE(double weighted within 10-bp close to PAM) , 1+ for #mismatches, default: 0
+  -m INT  Max mismatch, 0 for CREST-SE(2*#seed+#distal<4), 1 or more for #mismatches, default: 0
   -n INT  Max off-target, 0 for all, default: 1
   -v  verbose mode, default: off
 ```
