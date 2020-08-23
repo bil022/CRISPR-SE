@@ -34,7 +34,7 @@ Options:
 ```
 # Create index for ecoli reference genome
 $ ./se --index -r ecoli
-# Create index for simple.fa with one gRNA per line
+# Create index for simple.fa with simple format (one gRNA per line)
 $ ./se --index -r simple -s
 ```
 ## Search gRNAs
