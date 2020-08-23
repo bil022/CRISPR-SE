@@ -14,7 +14,7 @@ $ cd CRISPR-SE
 $ make
 $ ./se
 ```
-
+### Output
 ```
 Program: Crispr-SE (CRISPR Search Engine)
 Contact:  Bin Li <bil022@ucsd.edu>
