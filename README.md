@@ -32,20 +32,20 @@ Options:
 ```
 ## Create index
 ```
-# create index for ecoli reference genome
+# Create index for ecoli reference genome
 $ ./se --index -r ecoli
-# create index for simple.fa with one gRNA per line
-$ ./se --index -sr simple
+# Create index for simple.fa with one gRNA per line
+$ ./se --index -r simple -s
 ```
 ## Search gRNAs
 ```
-# search genome-wide gRNA
+# Search genome-wide gRNA
 $ ./se --build -r ecoli -p 2
 
-# search gRNA in list of gRNAs in simple format
+# Search gRNA in list of gRNAs in simple format
 $ ./se --build -r ecoli -q simple -p 2
 
-# search offtargets (slower)
+# Dump off-targets
 $ ./se --build -r ecoli -q simple -p 2 -v
 
 ```
