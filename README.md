@@ -67,7 +67,7 @@ ecoli.ref: all unique gRNAs
 ecoli.rep: all repeats
 ecoli.h: header files to be used to generate BAM file
 ```
-##### Build:
+#### Build:
 ```
 ./se --build -p 4 -r ecoli
 ```
@@ -75,7 +75,7 @@ ecoli.h: header files to be used to generate BAM file
 ```
 ecoli.mm: gRNAs passing off-targets searching criteria 
 ```
-Format:
+#### Text format:
 ```
 ID:gRNA	Strand	Chromosome	Start-pos	30	20M	*	0	0	Reference_sequence	IIIIIIIIIIIIIIIIIIII
 ```
@@ -86,8 +86,8 @@ f1e91a1b9a:TTCTGTCATTCACTTGCAGG	16	chr6	31132644	30	20M	*	0	0	CCTGCAAGTGAATGACAG
 6cc705b832:TAGAATGTCCAAGCAGAGTC	16	chr6	31132701	30	20M	*	0	0	GACTCTGCTTGGACATTCTA	IIIIIIIIIIIIIIIIIIII
 ```
 
-#### Convert into bam format
-For reference genome only
+#### BAM format:
+For reference genome
 ```
 cat ecoli.h ecoli.mm | samtools view -Sb - > ecoli.bam
 ```
@@ -95,7 +95,8 @@ For user input simple.fa
 ```
 cat simple.h simple.mm | samtools view -Sb - > simple.bam
 ```
-#### View results
+
+#### Results:
 For reference genome
 ```
 samtools view ecoli.bam | less
