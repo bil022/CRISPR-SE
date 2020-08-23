@@ -24,8 +24,8 @@ Command:
 Options:
   -p INT  number of threads [2]
   -r STR  reference genome id (mm9, mm10, hg19, hg38, etc)
-  -s  The FASTA format is simple format of 20-nt gRNA per line
-  -q  The query (user inputs, search reference genome if not set)
+  -s The FASTA format is simple format of 20-nt gRNA per line
+  -q The query (user inputs, search reference genome if not set)
   -m INT  Max mismatch, 0 for CREST-SE(2*#seed+#distal<4), 1 or more for #mismatches, default: 0
   -n INT  Max off-target, 0 for all, default: 1
   -v  verbose mode, default: off
@@ -42,17 +42,36 @@ Options:
 ## Search gRNAs
 #### Search genome-wide gRNA for ecoli
 ```
-./se --build -r ecoli -p 2
+./se --build -r ecoli -p 4
 ```
 #### Search gRNAs in simple.fa using ecoli as reference genome
 ```
-./se --build -r ecoli -q simple -p 2
+./se --build -r ecoli -q simple -p 4
 ```
 #### Dump off-targets for gRNAs in simple.fa
 ```
-./se --build -r ecoli -q simple -p 2 -v
+./se --build -r ecoli -q simple -p 4 -v
 
 ```
+#### Output:
+1. Index create four files, for example:
+For an input of ecoli.fa, running: ./se --index -p 4 -r ecoli will generate:
+a) ecoli.idx: index file
+b) ecoli.ref: unique gRNAs
+c) ecoli.rep: gRNA repeats
+d) ecoli.h: header files to be used to generate BAM file from SAM format
+Note: all gRNAs are searched on both strand. For the user input with simple format(-s), gRNAs only use forward strand.
+
+2. Off-target search:
+a) In non-verbose mode, the output use SAM format, the file can be converted into BAM format with the header file, for example:
+Output format:
+ID:gRNA	Strand	Chromosome	Start-pos	30	20M	*	0	0	Reference_sequence	IIIIIIIIIIIIIIIIIIII
+
+Example:
+ecd6fbc7a4:ACTTGCAGGTGGTCCGAGTG	16	chr6	31132633	30	20M	*	0	0	CACTCGGACCACCTGCAAGT	IIIIIIIIIIIIIIIIIIII
+f1e91a1b9a:TTCTGTCATTCACTTGCAGG	16	chr6	31132644	30	20M	*	0	0	CCTGCAAGTGAATGACAGAA	IIIIIIIIIIIIIIIIIIII
+6cc705b832:TAGAATGTCCAAGCAGAGTC	16	chr6	31132701	30	20M	*	0	0	GACTCTGCTTGGACATTCTA	IIIIIIIIIIIIIIIIIIII
+
 #### Convert into bam format
 For reference genome only
 ```
