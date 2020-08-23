@@ -18,8 +18,8 @@ make
 Crispr-SE <command> [options]
 
 Command:
-  --index  create index from reference/query sequence in the FASTA format
-  --build  build whole genome single guide RNA (gRNA)
+  --index  create indices from reference/query sequence in the FASTA format.
+  --build  search gRNAs for reference/query indices.
 
 Options:
   -p INT  number of threads [2]
