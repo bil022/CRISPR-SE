@@ -15,22 +15,20 @@ make
 ```
 ## Usage
 ```
-Program: Crispr-SE (CRISPR Search Engine)
-Contact:  Bin Li <bil022@ucsd.edu>
-Usage:  Crispr-SE <command> [options]
+Crispr-SE <command> [options]
 
 Command:
---index  create index from reference/query sequence in the FASTA format
---build  build whole genome single guide RNA (gRNA)
+  --index  create index from reference/query sequence in the FASTA format
+  --build  build whole genome single guide RNA (gRNA)
 
 Options:
--p INT  number of threads [2]
--r STR  reference genome id (mm9, mm10, hg19, hg38, etc)
--s  The FASTA format is simple format of 20-nt gRNA per line
--q  The query (user inputs, search reference genome if not set)
--m INT  Max mismatch, 0 for CREST-SE(double weighted within 10-bp close to PAM) , 1+ for #mismatches, default: 0
--n INT  Max off-target, 0 for all, default: 1
--v  verbose mode, default: off
+  -p INT  number of threads [2]
+  -r STR  reference genome id (mm9, mm10, hg19, hg38, etc)
+  -s  The FASTA format is simple format of 20-nt gRNA per line
+  -q  The query (user inputs, search reference genome if not set)
+  -m INT  Max mismatch, 0 for CREST-SE(double weighted within 10-bp close to PAM) , 1+ for #mismatches, default: 0
+  -n INT  Max off-target, 0 for all, default: 1
+  -v  verbose mode, default: off
 ```
 ## Create index
 #### Create index for ecoli reference genome
