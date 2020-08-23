@@ -57,11 +57,20 @@ Options:
 
 ```
 #### Convert into bam format
+For reference genome only
 ```
 cat ecoli.h ecoli.mm | samtools view -Sb - > ecoli.bam
+```
+For user input simple.fa
+```
 cat simple.h simple.mm | samtools view -Sb - > simple.bam
 ```
 #### View results
+For reference genome
+```
+samtools view ecoli.bam | head
+```
+For user input simple.fa
 ```
 samtools view ecoli.bam | head
 ```
