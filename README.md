@@ -10,6 +10,7 @@ CTAAATCAGGATCAGATTCA
 ```
 ## Compile CRISPR-SE
 ```
+$ git clone https://github.com/bil022/CRISPR-SE
 $ cd CRISPR-SE
 $ make
 $ ./se
