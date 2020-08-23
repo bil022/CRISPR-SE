@@ -47,7 +47,7 @@ Options:
 ```
 ./se --build -r ecoli -p 2
 ```
-#### Search gRNAs in simple.fa
+#### Search gRNAs in simple.fa using ecoli as reference genome
 ```
 ./se --build -r ecoli -q simple -p 2
 ```
