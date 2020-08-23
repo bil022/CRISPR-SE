@@ -1,20 +1,20 @@
 # CRISPR-SE
-## Input:
+#### Input:
 Genome files in fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line, for example:
 ```bash
->simple
+>simple.fa
 TCTATTTTGTGGTTACTTTG
 GTGGTTACTTTGAGGAGAGT
 CTAAATCAGGATCAGATTCA
 ```
 ## Compile CRISPR-SE
 ```
-$ git clone https://github.com/bil022/CRISPR-SE
-$ cd CRISPR-SE
-$ make
-$ ./se
+git clone https://github.com/bil022/CRISPR-SE
+cd CRISPR-SE
+make
+./se
 ```
-### Output
+#### Output
 ```
 Program: Crispr-SE (CRISPR Search Engine)
 Contact:  Bin Li <bil022@ucsd.edu>
@@ -27,32 +27,41 @@ Command:
 Options:
 -p INT  number of threads [2]
 -r STR  reference genome id (mm9, mm10, hg19, hg38, etc)
--s  The FASTA format is simple format of 20-nt gRNA
--q  The indexed query
--m INT  Max mismatch, 0 for CREST-Seq, 1+ for #mismatches, default: 0
+-s  The FASTA format is simple format of 20-nt gRNA per line
+-q  The query (user inputs, search reference genome if not set)
+-m INT  Max mismatch, 0 for CREST-SE(double weighted within 10-bp close to PAM) , 1+ for #mismatches, default: 0
 -n INT  Max off-target, 0 for all, default: 1
--v  verbose mode, default: false
+-v  verbose mode, default: off
 ```
 ## Create index
-### Create index for ecoli reference genome
+#### Create index for ecoli reference genome
 ```
-$ ./se --index -r ecoli
+./se --index -r ecoli
 ```
-### Create index for simple.fa with simple format (one gRNA per line)
+#### Create index for simple.fa with simple format (one gRNA per line)
 ```
-$ ./se --index -r simple -s
+./se --index -r simple -s
 ```
 ## Search gRNAs
-### Search genome-wide gRNA
+#### Search genome-wide gRNA for ecoli
 ```
-$ ./se --build -r ecoli -p 2
+./se --build -r ecoli -p 2
 ```
-### Search gRNA in list of gRNAs in simple format
+#### Search gRNAs in simple.fa
 ```
-$ ./se --build -r ecoli -q simple -p 2
+./se --build -r ecoli -q simple -p 2
 ```
-### Dump off-targets
+#### Dump off-targets for gRNAs in simple.fa
 ```
-$ ./se --build -r ecoli -q simple -p 2 -v
+./se --build -r ecoli -q simple -p 2 -v
 
+```
+#### Convert into bam format
+```
+cat ecoli.h ecoli.mm | samtools view -Sb - > ecoli.bam
+cat simple.h simple.mm | samtools view -Sb - > simple.bam
+```
+#### View results
+```
+samtools view ecoli.bam | head
 ```
