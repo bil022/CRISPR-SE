@@ -13,6 +13,9 @@ $ git clone https://github.com/bil022/CRISPR-SE
 $ cd CRISPR-SE
 $ make
 $ ./se
+```
+
+```
 Program: Crispr-SE (CRISPR Search Engine)
 Contact:  Bin Li <bil022@ucsd.edu>
 Usage:  Crispr-SE <command> [options]
@@ -31,21 +34,25 @@ Options:
 -v  verbose mode, default: false
 ```
 ## Create index
+### Create index for ecoli reference genome
 ```
-# Create index for ecoli reference genome
 $ ./se --index -r ecoli
-# Create index for simple.fa with simple format (one gRNA per line)
+```
+### Create index for simple.fa with simple format (one gRNA per line)
+```
 $ ./se --index -r simple -s
 ```
 ## Search gRNAs
+### Search genome-wide gRNA
 ```
-# Search genome-wide gRNA
 $ ./se --build -r ecoli -p 2
-
-# Search gRNA in list of gRNAs in simple format
+```
+### Search gRNA in list of gRNAs in simple format
+```
 $ ./se --build -r ecoli -q simple -p 2
-
-# Dump off-targets
+```
+### Dump off-targets
+```
 $ ./se --build -r ecoli -q simple -p 2 -v
 
 ```
