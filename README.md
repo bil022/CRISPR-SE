@@ -1,8 +1,7 @@
 # CRISPR-SE
 ## Input:
-Genome files in fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line.
+Genome files in fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line, for example:
 ```bash
-$ head -n 3 simple.fa 
 >simple
 TCTATTTTGTGGTTACTTTG
 GTGGTTACTTTGAGGAGAGT
