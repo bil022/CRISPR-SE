@@ -75,7 +75,11 @@ ecoli.h: header files to be used to generate BAM file
 ```
 ecoli.mm: gRNAs passing off-targets searching criteria 
 ```
-Example:
+Format:
+```
+ID:gRNA	Strand	Chromosome	Start-pos	30	20M	*	0	0	Reference_sequence	IIIIIIIIIIIIIIIIIIII
+```
+
 ```
 ecd6fbc7a4:ACTTGCAGGTGGTCCGAGTG	16	chr6	31132633	30	20M	*	0	0	CACTCGGACCACCTGCAAGT	IIIIIIIIIIIIIIIIIIII
 f1e91a1b9a:TTCTGTCATTCACTTGCAGG	16	chr6	31132644	30	20M	*	0	0	CCTGCAAGTGAATGACAGAA	IIIIIIIIIIIIIIIIIIII
