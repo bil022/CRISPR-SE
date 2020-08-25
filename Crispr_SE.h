@@ -51,7 +51,7 @@ public:
     }
     uint64_t reversed:1;
     uint64_t many:1;
-    uint64_t chr:16; // max 64K chrosomes
+    uint64_t chr:18; // max 256K chrosomes
     uint64_t pos:32; // max 4G bp
 };
 
