@@ -1,0 +1,29 @@
+<article class="markdown-body">
+<h2>Download pre-computed {{ downloads.length }} gRNA libraries in BAM format:</h2>
+
+<md-input-container>
+<label>Select</label> <md-select ng-model="selectedRef">
+    <md-option ng-repeat="x in downloads" value="{{x.id}}">{{x.id}} - {{x.info}}</option>
+</md-select> <br/>
+Data source: {{ fastaUrl[selectedRef] }}</br>
+<a href="bam/" target="_download">Download</a>: {{selectedRef}}.bam, {{selectedRef}}.bam.bai
+</md-input-container>
+
+<h2>How to build gRNA libraries:</h2>
+<pre class="hljs"><code>./<a href="bin/se">se</a> --index -r {{selectedRef}}
+./<a href="bin/se">se</a> --build -r {{selectedRef}} -p 48
+cat {{selectedRef}}.h {{selectedRef}}.mm | samtools view -Sb - | samtools sort > {{selectedRef}}.bam
+samtools index {{selectedRef}}.bam</code></pre>
+
+<h2>The CRISPR-SE <a href="benchmark" target="_benchmark">Benchmark</a>:</h2>
+<pre class="hljs"><code>fa/ inputs in fasta format
+blast/ <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi" target="_blast">BLAST</a> - Basic Local Alignment Search Tool
+blat/ <a href="https://genome.ucsc.edu/cgi-bin/hgBlat" target="_blat">BLAT</a> - An alignment tool like BLAST
+bowtie/ <a href="http://bowtie-bio.sourceforge.net/index.shtml" target="_bowtie">Bowtie</a> - An ultrafast, memory-efficient short read aligner
+bowtie2/ <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml" target="_bowtie2">Bowtie 2</a> - Fast and sensitive read alignment
+bwa/ <a href="http://bio-bwa.sourceforge.net/" target="_bwa">BWA</a> - Burrows-Wheeler Aligner
+crisflash/ <a href="https://github.com/crisflash/crisflash" target="_crisflash">Crisflash</a> - A tool for rapid design and a potential off-target discovery tool for CRISPR/Cas9 guide RNAs
+crispr-se/ <a href="/" target="_crispr-se">CRISPR-SE</a> - Crispr Search Engine
+flashfry/ <a href="https://github.com/mckennalab/FlashFry" target="_flashfry">FlashFry</a> - A fast and flexible tool for large-scale CRISPR target design
+</code></pre>
+</article>

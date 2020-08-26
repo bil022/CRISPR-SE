@@ -15,3 +15,5 @@ build:
 gz:
 	echo tar -cvzf CRISPR-SE.tgz CRISPR-SE
 	echo "pwd | mail -s CRISPR-SE -a CRISPR-SE.tgz bil022@ucsd.edu"
+www:
+	rsync -anv renlab.sdsc.edu:/var/www/html/bil022/CRISPR-SE/[jitc]* www/.

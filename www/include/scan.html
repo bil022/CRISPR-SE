@@ -1,0 +1,40 @@
+<H2>Client gRNA scan tool:</H2>
+
+<p>Find gRNA match PAM sequences(NGG) without off-targets search
+ (<a href="#" ng-click="data.scan='ACCGAACTTTAAAATCTGTGTGGC'">example 1</a>,
+ <a href="#" ng-click="data.scan='CCCTTGCAGGTGGTCCGAGTGCGG'">example 2</a>):
+</p>
+
+<textarea style="min-width:90%; min-height: 100px;" ng-model="data.scan" name="scan">
+</textarea>
+<p/>
+<table>
+  <tr>
+    <td>
+      {{data.scan|scanSequence}}
+    </td>
+  </tr>
+  <tr><td> </td></tr>
+  <tr>
+    <td>
+      <input type="button" ng-click="scanDetail(data.scan)" value="view"/>
+    </td>
+  </tr>
+</table>
+
+<div ng-show="scanner.input">
+Input:&nbsp; {{scanner.input}}<p/>
+<!-- Revcmp: {{scanner.revcmp}}<br/ -->
+<table>
+  <tr>
+    <th ng-repeat="y in scanner.cols">
+    {{y}}
+    </th>
+  </tr>
+  <tr ng-repeat="x in scanner.table" ng-class="'color'+($index%2)">
+    <td ng-repeat="y in scanner.cols">
+    {{ x[y] }}
+    </td>
+  </tr>
+</table>
+</div>

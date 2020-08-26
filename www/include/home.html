@@ -1,0 +1,40 @@
+<h1>Welcome to CRISPR-SE (Search Engine)!</h1>
+
+<p>CRISPR-SE is a high-performance CRISPR search engine implemented with a brute force algorithm, where the off-targets search is complete/guaranteed.</p>
+<p>We have pre-computed genome-wide gRNAs libraries for human and mouse genomes(online/offline) and other genomes for download(offline):</p>
+
+<h2>Pre-computed gRNA libraries</h2>
+
+
+<h3>Online</h3>
+
+<ol>
+<li>Find the position of your sequence/genes using <a ng-click="showIdx(2)" href="#">BLAT</a> or <a ng-click="showIdx(3)" href="#">UCSC</a> genome browser. (optional)</li>
+<li><a ng-click="showIdx(1)" href="#">View</a> the pre-computed gRNAs within the positions</li>
+</ol>
+
+<h3>Offline</h3>
+
+<ol>
+<li><a ng-click="showIdx(5)" href="#">Download</a> the pre-computed bam files</li>
+<li>Search gRNAs using <a href="http://www.htslib.org/download/" target="_samtools">samtools</a></li>
+</ol>
+
+<h2>Build gRNA libraries</h2>
+
+<p>To build gRNA libraries for your own reference genomes.</p>
+
+<ol>
+<li>Download &amp; compile CRISPR-SE from <a href="https://github.com/bil022/CRISPR-SE">source code</a> or the <a ng-click="showIdx(6)" href="#">binary</a> program</li>
+<li>Build <a ng-click="showIdx(6)" href="#">index</a> files for the reference genome</li>
+<li>Build <a ng-click="showIdx(6)" href="#">index</a> files for the region of interests, inputs are either in Fasta format or simple format(one gRNA per line).
+  The simple format can be created using online <a ng-click="showIdx(4)" href="#">scan</a> tools. (skip this step for genome-wide gRNA design)</li>
+<li>Run <a ng-click="showIdx(6)" href="#">CRISPR-SE</a> for off-target search.</li>
+<li>Convert outputs into bam format and search gRNAs using <a href="http://www.htslib.org/download/" target="_samtools">samtools</a>.</li>
+</ol>
+
+<p>The source code is available at <a href="https://github.com/bil022/CRISPR-SE" target="github">https://github.com/bil022/CRISPR-SE</a>.<br/>
+If you have any questions, please <a ng-click="showIdx(7)" href="#">contact</a> us.</p>
+
+<font size="1">
+<a href="nmeth.4264.ris">Citation</a>: Diao, Y., Fang, R., Li, B., Meng, Z., Yu, J., Qiu, Y., Lin, K. C., Huang, H., Liu, T., Marina, R. J., Jung, I., Shen, Y., Guan, K.-L., and Ren, B. A tiling- deletion based genetic screen for cis-regulatory element identification in mammalian cells. <a href="https://www.nature.com/nmeth/journal/v14/n6/abs/nmeth.4264.html">Nature Methods</a>.</font>

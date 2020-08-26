@@ -1,0 +1,49 @@
+  
+<h2>Search pre-computed gRNAs with efficiency (Doench) score:</h2>
+<h4 style="display: inline;">Find the positions using <a ng-click="showIdx(2)" href="#">BLAT</a> or <a ng-click="showIdx(3)" href="#">UCSC</a> genome browser.</h4><p/>
+  <form ng-submit="go4table()">
+  <table>
+  <tr>
+    <td>
+    </td>
+    <td>
+      <select ng-model="data.ref" name="ref">
+        <option ng-repeat="option in constant.refs" value="{{option.id}}">{{option.id}}</option> 
+      </select>
+    </td>
+    <td>
+      <div style="width:300px">
+       <input style="width:90%" ng-model="data.region" name="region"/>
+      </div>
+    </td>
+    <td>
+      <input type="submit" ng-disabled="!valid(data.region)" value="go"/>
+    </td>
+  </tr>
+  <tr><td></td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><I>
+    {{data.region|regionInput:data.ref}}
+    </I></td>
+  </tr>
+  </table>
+  </form>
+  <div class="monosp" ng-show="php.table" align="left">
+<table>
+  <tr ng-repeat="x in php.table" ng-class="'color'+($index%2)">
+    <td ng-repeat="y in php.cols">
+    {{ x[y] }}
+    </td>
+  </tr>
+</table>
+<p>{{ php.message }}</p>
+<div ng-show="php.table">
+<b><a target="download" href="table.php?ref={{data.ref}}&region={{data.region}}&method=sgRNA">Download</a></b>
+</div>
+<p>Offline: <I>{{ php.script }}</I></p>
+</div>
+<div ng-hide="php.table">
+  <span style="color:red">{{ php.err }}</span>
+</div>

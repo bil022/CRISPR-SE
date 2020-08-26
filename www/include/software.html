@@ -1,0 +1,49 @@
+    <article class="markdown-body"><h1 id="crispr-se"><a class="header-link" href="#crispr-se"></a>CRISPR-SE</h1>
+<p>CRISPR-SE uses fasta format: (ex: mm10.fa, hg38.fa, ecoli.fa, simple.fa). There are two options: 1. standard fasta files 2. simple format, list of 20-bp guide RNAs (gRNAs), one gRNA per line. For example:</p>
+<pre class="hljs"><code>&gt;simple<span class="hljs-selector-class">.fa</span>
+TCTATTTTGTGGTTACTTTG
+GTGGTTACTTTGAGGAGAGT
+CTAAATCAGGATCAGATTCA</code></pre><h2 id="compile-crispr-se"><a class="header-link" href="#compile-crispr-se"></a>Compile CRISPR-SE</h2>
+<pre class="hljs"><code>git clone http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/bil022/CRISPR-SE
+<span class="hljs-keyword">cd</span> CRISPR-SE
+<span class="hljs-keyword">make</span>
+./<span class="hljs-keyword">se</span></code></pre><h2 id="usage"><a class="header-link" href="#usage"></a>Usage</h2>
+<pre class="hljs"><code>Crispr-SE &lt;command&gt; [options]
+
+Command:
+  -<span class="ruby">-index  create indices from reference/query sequence <span class="hljs-keyword">in</span> the FASTA format.
+</span>  -<span class="ruby">-build  search gRNAs <span class="hljs-keyword">for</span> reference/query indices.
+</span>
+Options:
+  -<span class="ruby">p INT  number of threads [<span class="hljs-number">2</span>]
+</span>  -<span class="ruby">r STR  reference genome id (mm9, mm1<span class="hljs-number">0</span>, hg19, hg38, etc)
+</span>  -<span class="ruby">s The FASTA format is simple format of <span class="hljs-number">20</span>-nt gRNA per line
+</span>  -<span class="ruby">q The query (user inputs, search reference genome <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> set)
+</span>  -<span class="ruby">m INT  Max mismatch, <span class="hljs-number">0</span> <span class="hljs-keyword">for</span> CREST-SE(<span class="hljs-number">2</span>*<span class="hljs-comment">#seed+#distal&lt;4), 1 or more for #mismatches, default: 0</span>
+</span>  -<span class="ruby">n INT  Max off-target, <span class="hljs-number">0</span> <span class="hljs-keyword">for</span> all, <span class="hljs-symbol">default:</span> <span class="hljs-number">1</span>
+</span>  -<span class="ruby">P NGG  PAM sequence, NGG or NAG, default: NGG</span>
+</span>  -<span class="ruby">v      verbose mode, <span class="hljs-symbol">default:</span> off</span></code></pre><h2 id="create-index"><a class="header-link" href="#create-index"></a>Create index</h2>
+<h4 id="create-index-for-ecoli-reference-genome"><a class="header-link" href="#create-index-for-ecoli-reference-genome"></a>Create index for ecoli reference genome</h4>
+<pre class="hljs"><code>./<span class="hljs-keyword">se</span> --<span class="hljs-built_in">index</span> -r ecoli</code></pre><h4 id="create-index-for-simple.fa-with-simple-format-(one-grna-per-line)"><a class="header-link" href="#create-index-for-simple.fa-with-simple-format-(one-grna-per-line)"></a>Create index for simple.fa with simple format (one gRNA per line)</h4>
+<pre class="hljs"><code>./<span class="hljs-keyword">se</span> --index -r simple -<span class="hljs-built_in">s</span></code></pre><p>Note: Reference genome inputs with fasta format are built for both strand. For the inputs in simple format(-s), gRNAs are built with forward strand only.</p>
+<h2 id="search-grnas"><a class="header-link" href="#search-grnas"></a>Search gRNAs</h2>
+<h4 id="search-genome-wide-grna-for-ecoli"><a class="header-link" href="#search-genome-wide-grna-for-ecoli"></a>Search genome-wide gRNA for ecoli</h4>
+<pre class="hljs"><code>./se --build -r ecoli -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4</span></code></pre><h4 id="search-grnas-in-simple.fa-using-ecoli-as-reference-genome"><a class="header-link" href="#search-grnas-in-simple.fa-using-ecoli-as-reference-genome"></a>Search gRNAs in simple.fa using ecoli as reference genome</h4>
+<pre class="hljs"><code>./se --build -r ecoli -<span class="hljs-selector-tag">q</span> simple -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4</span></code></pre><h4 id="dump-off-targets-for-grnas-in-simple.fa"><a class="header-link" href="#dump-off-targets-for-grnas-in-simple.fa"></a>Dump off-targets for gRNAs in simple.fa</h4>
+<pre class="hljs"><code>./se --build -r ecoli -<span class="hljs-selector-tag">q</span> simple -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4</span> -v
+</code></pre><h2 id="output:"><a class="header-link" href="#output:"></a>Output:</h2>
+<h4 id="index:"><a class="header-link" href="#index:"></a>Index:</h4>
+<pre class="hljs"><code>./se --index -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4</span> -r ecoli</code></pre><pre class="hljs"><code>ecoli<span class="hljs-selector-class">.idx</span>: index file
+ecoli<span class="hljs-selector-class">.ref</span>: all unique gRNAs
+ecoli<span class="hljs-selector-class">.rep</span>: all repeats
+ecoli<span class="hljs-selector-class">.h</span>: <span class="hljs-selector-tag">header</span> files to be used to generate BAM file</code></pre><h4 id="build:"><a class="header-link" href="#build:"></a>Build:</h4>
+<pre class="hljs"><code>./se --build -<span class="hljs-selector-tag">p</span> <span class="hljs-number">4</span> -r ecoli</code></pre><pre class="hljs"><code>ecoli<span class="hljs-selector-class">.mm</span>: gRNAs passing off-targets searching criteria </code></pre><h4 id="text-format:"><a class="header-link" href="#text-format:"></a>Text format:</h4>
+<pre class="hljs"><code>ID:gRNA    Strand    Chromosome    Start-pos   <span class="hljs-number"> 30 </span>   20M    *   <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>   Reference_sequence    IIIIIIIIIIIIIIIIIIII</code></pre><pre class="hljs"><code>ecd6fbc7a4:ACTTGCAGGTGGTCCGAGTG   <span class="hljs-number"> 16 </span>   chr6   <span class="hljs-number"> 31132633 </span>  <span class="hljs-number"> 30 </span>   20M    *   <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>   CACTCGGACCACCTGCAAGT    IIIIIIIIIIIIIIIIIIII
+f1e91a1b9a:TTCTGTCATTCACTTGCAGG   <span class="hljs-number"> 16 </span>   chr6   <span class="hljs-number"> 31132644 </span>  <span class="hljs-number"> 30 </span>   20M    *   <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>   CCTGCAAGTGAATGACAGAA    IIIIIIIIIIIIIIIIIIII
+6cc705b832:TAGAATGTCCAAGCAGAGTC   <span class="hljs-number"> 16 </span>   chr6   <span class="hljs-number"> 31132701 </span>  <span class="hljs-number"> 30 </span>   20M    *   <span class="hljs-number"> 0 </span>  <span class="hljs-number"> 0 </span>   GACTCTGCTTGGACATTCTA    IIIIIIIIIIIIIIIIIIII</code></pre><h4 id="bam-format:"><a class="header-link" href="#bam-format:"></a>BAM format:</h4>
+<p>For reference genome</p>
+<pre class="hljs"><code><span class="hljs-keyword">cat</span> ecoli.<span class="hljs-keyword">h</span> ecoli.mm | samtools <span class="hljs-keyword">view</span> -Sb - &gt; ecoli.bam</code></pre><p>For user input simple.fa</p>
+<pre class="hljs"><code>cat <span class="hljs-built_in">simple</span>.h <span class="hljs-built_in">simple</span>.mm | <span class="hljs-type">samtools</span> view -Sb - &gt; <span class="hljs-built_in">simple</span>.bam</code></pre><h4 id="results:"><a class="header-link" href="#results:"></a>Results:</h4>
+<p>For reference genome</p>
+<pre class="hljs"><code>samtools view ecoli.bam <span class="hljs-string">| less</span></code></pre><p>For user input simple.fa</p>
+<pre class="hljs"><code>samtools view ecoli.bam <span class="hljs-string">| less</span></code></pre>    </article>
