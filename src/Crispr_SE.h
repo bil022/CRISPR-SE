@@ -37,6 +37,9 @@ using namespace std;
 //extern map<size_t, string> chrOf;
 extern pthread_mutex_t mtx;
 
+/* 
+   Crispr_t: class to keep location of the gRNA (chromsome and position) of gRNAs,  
+ */
 class Crispr_t {
 public:
     Crispr_t() {
@@ -61,11 +64,19 @@ public:
 bool file_exist(string& file);
 uint32_t udist(uint32_t a, uint32_t b);
 
+/*
+  class of CRISPR database
+  */
+
 class CrisprDB {
 protected:
+    // chrs: Hash table to map chr names into a number, reduce memory usage
     map<string, size_t> chrs;
+    // chrOf: Reverse of chrs, use to find the name of the chrs in output
     map<size_t, string> chrOf;
+    // db: Hash table to store unique gRNAs with their locations
     map<int64_t, Crispr_t> db;
+    // Another hash table to keep the efficiency score
     map<int64_t, float> eff_db;
 public:
     CrisprDB(string ref) {
@@ -79,28 +90,42 @@ public:
     }
     //static int64_t ngg2cid(char* seq);
     //static void cid2ngg(int64_t cid, char* ngg);
+    // load sequence in fasta format, both strand
     void loadRef();
+    // load sequence in simple format, one gRNA per line, single strand
     void loadSimple();
+    // design for ineffective gRNAs for control
     void scanIneffctive();
 protected:
+    // save the database(db) into two layers of seed + distal_group_size, followed by list of distals
     void saveIdx();
+    // function used by saveIdx to add each individual gRNAs
     bool addGuideRNA(char* ngg, string& chr, bool reversed, int pos, string&);
     // float doench(string&ref, int pos, bool reversed);
     
+    // keep the sequence length per chromosome
     map<string, size_t> header;
+    // reverse complementary
     static void revcomp(char* seq);
+    // check if sequence is ACTG
     static bool good(char* seq);
-    virtual void found(int offset) { assert(false); }
+    // virtual void found(int offset) { assert(false); }
     
+    // reference sequence id: hg38, mm10, etc
     string ref;
+    // File pointer to replicates
     FILE* rep;
+    // convert a record into sam format
     inline void sam(FILE*fp, int64_t key, Crispr_t c, int, float doench);
+    // search sequence for NGG/NAG
     void scanPAM(string& chr, string& seq);
+    // function called by saveIdx for each group of distals with same seed region
     void outputIdx(FILE* fp, size_t key, vector<uint32_t>& lst);
 };
 
 #define MAX_UINT32 0x7FFFFFFF
 
+// class to keep the two-layers(seed + distal_group_size: list of distals) for fast gRNA search
 class CrisprSE : public vector<uint32_t> {
 public:
     CrisprSE() { query_ptr=0; }
@@ -111,15 +136,19 @@ public:
         string idx_file=opt.getFile(src, ".idx");
         FILE* fp=fopen(idx_file.c_str(), "r");
         // clear();
+        // CrisprSE will load reference only, or both reference and query dataset
+        // use query_ptr to separate the two datasets
         if (size()) {
             assert(query_ptr==0);
             query_ptr=size();
         }
         uint32_t seed, sz, distal, total=0;
         //while (fscanf(fp, "%X\t%u\n", &seed, &sz)==2) {
+        // read seed(hex) and distal_group_size
         while (getNum(fp, seed) && getNum(fp, sz, false)) {
             push_back(seed);
             push_back(sz);
+            // read distal
             for (size_t i=0; i<sz; i++) {
                 //int ret=fscanf(fp, "%X\n", &distal);
                 //assert(ret==1);
@@ -134,8 +163,9 @@ public:
         tm.tick(src);
     }
     
+    // faster way to scan numbers
     // https://www.geeksforgeeks.org/fast-io-for-competitive-programming/
-    bool getNum(FILE* fp, uint32_t &number, bool hex=true)
+    inline bool getNum(FILE* fp, uint32_t &number, bool hex=true)
     {
         register int c;
         number = 0;
@@ -162,6 +192,7 @@ public:
     }
 };
 
+// class to calculate the doench score
 class Doench {
 public:
     static float doench(string&ref, int pos, bool reversed) {

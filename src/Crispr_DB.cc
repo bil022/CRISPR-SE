@@ -1,5 +1,6 @@
 #include "Crispr_SE.h"
 
+// load reference genome file in fasta format
 void CrisprDB::loadRef() {
     string rep_file=opt.refFile(".rep", false);
     rep=fopen(rep_file.c_str(), "w");
@@ -7,10 +8,12 @@ void CrisprDB::loadRef() {
     string fa_file=opt.refFile(".fa");
     fstream ifs(fa_file.c_str());
     
+    // read fasta files
     string ln, chr, seq;
     while (getline(ifs, ln)) {
         if (ln.length() && ln[0]=='>') {
             if (seq.length()) {
+                // Scan NGG/NAG & keep the sequence length
                 scanPAM(chr, seq);
                 header[chr]=seq.size();
                 seq.clear();
@@ -18,17 +21,22 @@ void CrisprDB::loadRef() {
             seq.clear(); chr=ln.substr(1);
             continue;
         }
+        // Conver the sequence to upper case
         transform(ln.begin(), ln.end(), ln.begin(), ::toupper);
         seq.append(ln);
     }
-    scanPAM(chr, seq);
-    header[chr]=seq.size();
-    seq.clear();
-    
+    // scan the last one if any
+    if (seq.length()) {
+        scanPAM(chr, seq);
+        header[chr]=seq.size();
+        seq.clear();
+    }
+
+    // save to index file
     saveIdx();
 }
 
-// user sgRNA, assuming one sgRNA per line
+// user gRNA, assuming one sgRNA per line
 void CrisprDB::loadSimple() {
     string rep_file=opt.refFile(".rep", false);
     rep=fopen(rep_file.c_str(), "w");
@@ -37,44 +45,58 @@ void CrisprDB::loadSimple() {
     fstream ifs(fa_file.c_str());
     string ln, chr="NA";
     
+    // scan file in simple format
     while (getline(ifs, ln)) {
         if (ln[0]=='>') {
             chr=ln.substr(1);
             continue;
         }
         size_t len=ln.length();
+        // use header to trace the position of the gRNA
         header[chr]+=len;
         assert(len==20 || len==23);
+        // to upper case
         transform(ln.begin(), ln.end(), ln.begin(), ::toupper);
         if (len==23) {
             assert(ln[21]=='G' && ln[22]=='G');
             ln.resize(20);
         }
+        // get position
         uint32_t pos=(uint32_t)header[chr];
+        // convert in 2-bits format
         int64_t cid=Util::ngg2cid((char*)ln.c_str());
+        // check if it is new chromosome
         if (chrs.find(chr)==chrs.end()) {
             size_t nChr=chrs.size();
             chrs[chr]=nChr;
             chrOf[nChr]=chr;
         }
+        // make a gRNA record
         Crispr_t crispr(false, chrs[chr], pos);
+        // check if it is repeated
         map<int64_t, Crispr_t>::iterator other_itr=db.find(cid);
-        if (other_itr!=db.end()) { // may skip the palindrome
+        if (other_itr!=db.end()) { // may skip the palindrome?
+            // find the other repeat
             Crispr_t& other=other_itr->second;
+            // if the other repeat has not been identified as repeat, mark it, save it
             if (!other.many) {
                 other.many=1; // assert(db[cid].many==1);
                 sam(rep, cid, other, Q_TOOMANY, -1);
             }
+            // mark current one is repeat, save it
             crispr.many=1;
             sam(rep, cid, crispr, Q_TOOMANY, -1);
         }
+        // keep the last record
         db[cid]=crispr;
         eff_db[cid]=-1;
     }
     
+    // save vector to index file
     saveIdx();
 }
 
+// scan gRNA from long reference sequence
 void CrisprDB::scanPAM(string& chr, string& seq) {
     assert(chr.size());
 #ifdef DEBUG
@@ -114,6 +136,7 @@ void CrisprDB::scanPAM(string& chr, string& seq) {
         
         if (strlen(ptr)!=CRISPR_LEN) continue;
         // cerr << "Adding " << ptr << endl;
+        // add gRNA
         if (addGuideRNA(ptr, chr, reversed, pos, seq)) {
             if (reversed) revs++; else fwds++;
         }
@@ -124,6 +147,7 @@ void CrisprDB::scanPAM(string& chr, string& seq) {
 #endif
 }
 
+// check if gRNA is ACTG's
 bool CrisprDB::good(char* seq) {
     while (*seq) {
         switch (*seq) {
@@ -138,6 +162,7 @@ bool CrisprDB::good(char* seq) {
     return true;
 }
 
+// reverse complementary
 void CrisprDB::revcomp(char* seq) {
     unsigned long n=strlen(seq), i, n2=n/2;
     // reverse complementary
@@ -158,7 +183,9 @@ void CrisprDB::revcomp(char* seq) {
     }
 }
 
+// add gRNA
 bool CrisprDB::addGuideRNA(char* ngg, string& chr, bool reversed, int pos, string& seq) {
+    // convert the sequence into 2-bits
     int64_t cid=Util::ngg2cid(ngg);
     if (chrs.find(chr)==chrs.end()) {
         size_t nChr=chrs.size();
@@ -166,7 +193,9 @@ bool CrisprDB::addGuideRNA(char* ngg, string& chr, bool reversed, int pos, strin
         chrOf[nChr]=chr;
     }
     Crispr_t crispr(reversed, chrs[chr], pos);
+    // calculate efficiency score
     float efficiency=Doench::doench(seq, pos, reversed);
+    // check if it is repeated
     map<int64_t, Crispr_t>::iterator other_itr=db.find(cid);
     if (other_itr!=db.end()) { // may skip the palindrome
         Crispr_t& other=other_itr->second;
@@ -178,11 +207,13 @@ bool CrisprDB::addGuideRNA(char* ngg, string& chr, bool reversed, int pos, strin
         sam(rep, cid, crispr, Q_TOOMANY, efficiency);
         return false;
     }
+    // update record and efficiecy score
     db[cid]=crispr;
     eff_db[cid]=efficiency;
     return true;
 }
 
+// save the record in SAM format for samtools
 void CrisprDB::sam(FILE*fp, int64_t key, Crispr_t c, int qual, float efficiency) {
     char ngg[24], rev[24];
     Util::cid2ngg(key, ngg);
@@ -193,6 +224,7 @@ void CrisprDB::sam(FILE*fp, int64_t key, Crispr_t c, int qual, float efficiency)
             key, ngg, c.reversed?16:0, chrOf[c.chr].c_str(), (int)(c.pos+1), qual, CRISPR_LEN, rev, CRISPR_QUAL, efficiency);
 }
 
+// save the group of gRNA with same seed region
 void CrisprDB::outputIdx(FILE* fp, size_t key, vector<uint32_t>& lst) {
     assert(lst.size());
     fprintf(fp, "%zX\t%lu\n", key, lst.size());
@@ -204,6 +236,7 @@ void CrisprDB::outputIdx(FILE* fp, size_t key, vector<uint32_t>& lst) {
     lst.clear();
 }
 
+// save header, gRNA sequences in SAM format and the index
 void CrisprDB::saveIdx() {
     // Save header file
     string h_file=opt.refFile(".h", false);
@@ -214,7 +247,7 @@ void CrisprDB::saveIdx() {
         header_itr++;
     }
     
-    // Save reference list
+    // Save reference in SAM format
     string ref_file=opt.refFile(".ref", false);
     FILE* ref_fp=fopen(ref_file.c_str(), "w");
     map<int64_t, Crispr_t>::iterator db_itr;
@@ -227,7 +260,7 @@ void CrisprDB::saveIdx() {
     }
     fclose(ref_fp);
     
-    // Save index
+    // Scan db and groups of distals with same seed
     string idx_file=opt.refFile(".idx", false);
     FILE* idx_fp=fopen(idx_file.c_str(), "w");
     map<int64_t, Crispr_t>::iterator itr=db.begin();
@@ -237,6 +270,7 @@ void CrisprDB::saveIdx() {
     while (itr!=db.end()) {
         uint32_t seed=(uint32_t)(itr->first>>20), distal=itr->first&MASK;
         if (!head && seed!=last_seed) {
+            // save group of distals with same seed
             outputIdx(idx_fp, last_seed, lst);
         }
         head=false;
@@ -251,6 +285,7 @@ void CrisprDB::saveIdx() {
     fclose(idx_fp);
 }
 
+// dataset used to calculate Doench score
 int Doench::offs[70]={1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 11, 14, 14, 15, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 23, 23, 23, 24, 24, 24, 27, 27, 28, 29, 1, 4, 5, 5, 6, 11, 11, 11, 11, 12, 13, 13, 16, 18, 18, 19, 19, 20, 20, 20, 20, 21, 22, 22, 23, 23, 24, 24, 24, 26, 28};
 const char* Doench::seqs[70]={"G", "A", "C", "C", "C", "G", "A", "C", "C", "G", "A", "A", "C", "A", "C", "T", "A", "G", "C", "G", "A", "C", "G", "T", "G", "T", "C", "T", "T", "C", "G", "T", "A", "C", "T", "G", "T", "C", "G", "GT", "GC", "AA", "TA", "GG", "GG", "TA", "TC", "TT", "GG", "GA", "GC", "TG", "GG", "TC", "CC", "TG", "AC", "CG", "GA", "GG", "TC", "CG", "CT", "AA", "AG", "AG", "CG", "TG", "GT", "GG"};
 int Doench::lens[70]={1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};

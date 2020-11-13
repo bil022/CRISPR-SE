@@ -22,6 +22,7 @@
 using namespace std;
 extern pthread_mutex_t mtx;
 
+/* class to keep track of time */
 #include <time.h>
 class Timer
 {
@@ -44,6 +45,15 @@ public:
 private:
     timespec beg_, end_;
 };
+
+/* 
+  class Option to parse arguments:
+    There are to main functions: index & build
+    index: Create indices for reference genome or user input
+        option -s: simple format for input as one gRNA per line
+    build: Build genome-wide gRNA candiate, can also be used to perform offtarget search with user input
+        option -v: output off-targets details
+*/
 
 #define	TASK_HELP	0
 #define	TASK_INDEX	1
@@ -206,6 +216,7 @@ extern Option opt;
 
 void mkPair();
 
+/* class Util: convert gRNA into 2-bits code or reverse */
 class Util {
 public:
     static int64_t ngg2cid(char* seq) {
