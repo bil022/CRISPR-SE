@@ -32,16 +32,22 @@ $prog/$prog.txt
 ## Example:
 ```
 # To test reference genome mm10 with up to 3 mismatch (m=3) using blast, the input is fa/mm10.m3.fasta.gz
-# In run.sh:
+>chr1:3002096+ab885bae99#CTCTTGTTGTCCATATGTTT-A
+CTCTTGTTGTCCATATGTTTAGG
+
+# run.sh:
 $time -f "%e real,%U user,%S sys,%P CPU,%K mem(K): %C" -o blast/$ref.m$m.blast.tm $blastn -task blastn-short -ungapped -num_threads 8 -db ../bin/$ref -query <(zcat fa/$ref.m$m.fasta.gz|filt) -evalue 1 -outfmt "7 delim=qseqid length mismatch evalue qstart qend sseqid sstart send sstrand sseq" 2> blast/$ref.m$m.blast.log | gzip > blast/$ref.m$m.blast.gz
+
 # The outputs include blast/mm10.m3.blast.tm indicating total time is 15083 seconds
 15083.39 real ...
+
 # blast.sh will read the blast/mm10.m1.blast.gz and output the accuracies to blast.txt
 blast/blast.sh
-# blast/blast.txt shows the accuracies of 31%
+
 # ref m$m #total_outputs #zero_mismatch #3_mismatches #unexpected
 mm10 3 13055 10000 3055 0
 
+# blast/blast.txt shows the accuracies of 31%
 
 
 ```
