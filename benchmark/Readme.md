@@ -4,21 +4,28 @@ The CRISPR-SE benchmark evaluate the accuracies and speeds of existing mismatch 
 
 ## Inputs:
 ```
+# The guide RNAs that have at least $m mismatches (1-4) to another gRNA in reference genome ($ref, ex: mm10, hg38)
 fa/$ref.m$m.fasta.gz
 ```
-* The guide RNAs that have at least $m mismatches (1-4) to another gRNA in reference genome ($ref, ex: mm10, hg38)
 
-## Program:
+## Programs:
 ```
-# program to run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
+# Scripts to run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
 run.sh
+# Scripts to run CRISPR-SE
 crispr-se/run.sh
+# Scripts to run CrisFlash
 run_crisflash.sh
+# Scripts to run FlashFry
 run_flashfry.sh
+
+# Scripts to calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
 $prog/$prog.sh
 ```
-## Output:
+## Outputs:
 ```
-$prog/$prog.txt
+# The total number of used CPU times
 $prog/$ref.m$m.$prog.tm
+# The accuracies
+$prog/$prog.txt
 ```
