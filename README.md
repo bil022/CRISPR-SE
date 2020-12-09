@@ -15,7 +15,7 @@ make
 ```
 ## Usage
 ```
-Crispr-SE <command> [options]
+./se <command> [options]
 
 Command:
   --index  create indices from reference/query sequence in the FASTA format.
@@ -99,9 +99,9 @@ cat simple.h simple.mm | samtools view -Sb - > simple.bam
 #### Results:
 For reference genome
 ```
-samtools view ecoli.bam | less
+samtools view ecoli.bam
 ```
 For user input simple.fa
 ```
-samtools view ecoli.bam | less
+samtools view ecoli.bam
 ```
