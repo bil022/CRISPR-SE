@@ -11,18 +11,18 @@ Datasets with the guide RNAs that have at least $m(1-4) mismatches to another gR
 fa/$ref.m$m.fasta.gz
 ```
 
-## Programs:
+## Scripts:
 ```
-# Scripts to run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
+# run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
 run.sh
-# Scripts to run CRISPR-SE
+# run CRISPR-SE
 crispr-se/run.sh
-# Scripts to run CrisFlash
+# run CrisFlash
 run_crisflash.sh
-# Scripts to run FlashFry
+# run FlashFry
 run_flashfry.sh
 
-# Scripts to calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
+# Calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
 $prog/$prog.sh
 ```
 ## Outputs:
