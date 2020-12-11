@@ -16,7 +16,7 @@ se --build -m 5 -v -r EcoliE84 -q $input | crispor-se.pl --format | sort | crisp
 3. Example:
 Query GATGGCGTTTAATCGCCTTCCGG at Chromosome:254218-254240 (Ecoli) reverse strand. Updated [CRISPOR with CRISPR-SE](http://renlab.sdsc.edu/CRISPR-SE/crispor/crispor.py) reported two off-targets, where origin [CRISPOR](http://crispor.tefor.net/crispor.py) only report the first one:
 ```
-guide1:     GATGGCGTTTAATCGCCTTC CGG
+guide 1:    GATGGCGTTTAATCGCCTTC CGG
 off-target: GATGGCCATGAATGGCCTTC AGG
                   ** *   *      
 CFD Off-target score: 0.000000
@@ -25,7 +25,7 @@ Position: Chromosome:782981-783003:+
 Distance from target: 0.529 Mbp
 ```
 ```
-guide2:     GATGGCGTTTAATCGCCTTC CGG
+guide 2:    GATGGCGTTTAATCGCCTTC CGG
 off-target: GAAGGCGATTAAACGCCATC CGG
               *    *    *    *  
 CFD Off-target score: 0.263736
