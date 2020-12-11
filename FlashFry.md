@@ -1,9 +1,9 @@
 ## Scoring function:
 
-### Scoring function is still an open question; there are many scoring functions available. CRISPR-SE provides a script to convert the outputs into the format that can be scored by FlashFry.
+### There are many scoring functions available. CRISPR-SE provides a script to convert the outputs into the format that can be scored by FlashFry.
 
-### Example of using FlashFry to build index for reference genome, search off-targets and scoring. Inputs: reference genome *EcoliE84.fa* and query *ecoli_input.fa*
-
+#### Example of using FlashFry to build index for reference genome, search off-targets and scoring. 
+#### Inputs: reference genome *EcoliE84.fa* and query *ecoli_input.fa*
 ```
 input=ecoli_input
 
