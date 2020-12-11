@@ -1,4 +1,15 @@
+
 # Markdown Cheat Sheet
+
+```
+bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 EcoliE84.fa $input.fa > $input.sa
+bwa samse -n 60000 EcoliE84.fa $input.sa $input.fa 
+```
+
+```
+se --index -sr $input
+se --build -m 5 -v -r EcoliE84 -q $input | crispor-se.pl --format | sort | crispor-se.pl --parse --ref EcoliE84 --query $input 
+```
 
 Thanks for visiting [The Markdown Guide](https://www.markdownguide.org)!
 
