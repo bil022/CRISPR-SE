@@ -1,10 +1,12 @@
-### Scoring function: CRISPR-SE provides a script to convert the outputs into the format that can be scored by FlashFry.
-
-#### Example of using FlashFry to build index for reference genome, search off-targets and scoring. 
-#### Inputs: reference genome *EcoliE84.fa* and query *ecoli_input.fa*
+### Scoring function:
+#### CRISPR-SE provides a script to convert the outputs into the format that can be scored by FlashFry.
 ```
+# Inputs:
+#   EcoliE84.fa: reference genome
+#.  ecoli_input.fa: query
 input=ecoli_input
 
+# Build index for reference genome
 java -Xmx4g -jar FlashFry-assembly-1.12.jar \
  index \
  --tmpLocation ./tmp \
@@ -12,12 +14,14 @@ java -Xmx4g -jar FlashFry-assembly-1.12.jar \
  --reference EcoliE84.fa \
  --enzyme spcas9ngg
 
+# Search off-targets
 java -Xmx4g -jar FlashFry-assembly-1.12.jar \
  discover \
  --database ecoli_cas9ngg_database \
  --fasta $input.fa \
  --output $input.output
 
+# Scoring
 java -Xmx4g -jar FlashFry-assembly-1.12.jar \
  score \
  --input $input.output \
