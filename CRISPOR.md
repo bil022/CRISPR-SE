@@ -8,15 +8,15 @@
 bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 EcoliE84.fa $input.fa > $input.sa
 bwa samse -n 60000 EcoliE84.fa $input.sa $input.fa 
 ```
-2. Use CRISPR-SE with the following scripts to generate same output format as BWA: 
+2. Use CRISPR-SE (se) to generate same output format as BWA: 
 ```
 se --index -sr $input
 se --build -m 5 -v -r EcoliE84 -q $input | crispor-se.pl --format | sort | crispor-se.pl --parse --ref EcoliE84 --query $input 
 ```
 3. Example:
-For the query of GATGGCGTTTAATCGCCTTCCGG with Ecoli from Chromosome:254218-254240, reverse strand:
+Query GATGGCGTTTAATCGCCTTCCGG at Chromosome:254218-254240 (Ecoli) reverse strand:
 
-CRISPOR with [CRISPR-SE](http://renlab.sdsc.edu/CRISPR-SE/crispor/crispor.py) reported two off-targets, where [CRISPOR](http://crispor.tefor.net/crispor.py) can only report the first one:
+Updated CRISPOR with [CRISPR-SE](http://renlab.sdsc.edu/CRISPR-SE/crispor/crispor.py) reported two off-targets, where origin [CRISPOR](http://crispor.tefor.net/crispor.py) only report the first one:
 ```
 guide:      GATGGCGTTTAATCGCCTTC CGG
 off-target: GATGGCCATGAATGGCCTTC AGG
