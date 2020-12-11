@@ -1,5 +1,5 @@
 ### Scoring function:
-#### CRISPR-SE uses much less time in build index and query. CRISPR-SE provides a script to convert the outputs into the format that can be scored using FlashFry.
+#### CRISPR-SE run much faster in build index and query. CRISPR-SE provides a script to convert the outputs into the format that can be scored using FlashFry.
 #### The scripts provided by FlashFry for index, query and scoring:
 ```
 # Inputs:
