@@ -3,6 +3,31 @@
 ## There are many scoring functions available:
 
 ```
+input=ecoli_input
+
+java -Xmx4g -jar FlashFry-assembly-1.12.jar \
+ index \
+ --tmpLocation ./tmp \
+ --database ecoli_cas9ngg_database \
+ --reference EcoliE84.fa \
+ --enzyme spcas9ngg
+
+java -Xmx4g -jar FlashFry-assembly-1.12.jar \
+ discover \
+ --database ecoli_cas9ngg_database \
+ --fasta $input.fa \
+ --output $input.output
+
+java -Xmx4g -jar FlashFry-assembly-1.12.jar \
+ score \
+ --input $input.output \
+ --output $input.output.scored \
+ --scoringMetrics doench2014ontarget,doench2016cfd,dangerous,hsu2013,minot \
+ --database ecoli_cas9ngg_database
+```
+
+
+```
 $BIN/se --index -r $input
 ./flashfry.pl --context --query $input > $input.ctx
 
