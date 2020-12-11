@@ -1,101 +1,20 @@
-# Markdown Cheat Sheet
+# Scoring function:
 
-Thanks for visiting [The Markdown Guide](https://www.markdownguide.org)!
-
-This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax) and [extended syntax](https://www.markdownguide.org/extended-syntax).
-
-## Basic Syntax
-
-These are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements.
-
-### Heading
-
-# H1
-## H2
-### H3
-
-### Bold
-
-**bold text**
-
-### Italic
-
-*italicized text*
-
-### Blockquote
-
-> blockquote
-
-### Ordered List
-
-1. First item
-2. Second item
-3. Third item
-
-### Unordered List
-
-- First item
-- Second item
-- Third item
-
-### Code
-
-`code`
-
-### Horizontal Rule
-
----
-
-### Link
-
-[title](https://www.example.com)
-
-### Image
-
-![alt text](image.jpg)
-
-## Extended Syntax
-
-These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.
-
-### Table
-
-| Syntax | Description |
-| ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-
-### Fenced Code Block
+## There are many scoring functions available:
 
 ```
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
+$BIN/se --index -r $input
+./flashfry.pl --context --query $input > $input.ctx
+
+#31f78d:CGATGCGGCAGATTGCGCCA	0	ecoli_input	11	30	20M	*	0	0	CGATGCGGCAGATTGCGCCA	IIIIIIIIIIIIIIIIIIII	EF:f:0.794850
+sed 's/:/ /' $input.ref | awk '{print ">"$1"\n"$2}' > $input.se.fa
+
+$BIN/se --build -m 5 -v -r $REF -q $input | ./flashfry.pl --format | sort | ./flashfry.pl --parse --ref $REF --query $input.se | ./flashfry.pl --discover --query $input | sort -k1,1 -k2,2n > $input.se.output
+
+java -Xmx4g -jar FlashFry-assembly-1.12.jar \
+ score \
+ --input $input.se.output \
+ --output $input.se.output.scored \
+ --scoringMetrics doench2014ontarget,doench2016cfd,dangerous,hsu2013,minot \
+ --database ecoli_cas9ngg_database
 ```
-
-### Footnote
-
-Here's a sentence with a footnote. [^1]
-
-[^1]: This is the footnote.
-
-### Heading ID
-
-### My Great Heading {#custom-id}
-
-### Definition List
-
-term
-: definition
-
-### Strikethrough
-
-~~The world is flat.~~
-
-### Task List
-
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
