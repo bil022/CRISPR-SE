@@ -14,7 +14,7 @@ se --index -sr $input
 se --build -m 5 -v -r EcoliE84 -q $input | crispor-se.pl --format | sort | crispor-se.pl --parse --ref EcoliE84 --query $input 
 ```
 3. Example:
-Query GATGGCGTTTAATCGCCTTCCGG at Chromosome:254218-254240 (Ecoli) reverse strand. Updated [CRISPOR with CRISPR-SE](http://renlab.sdsc.edu/CRISPR-SE/crispor/crispor.py) reported two off-targets, where origin [CRISPOR](http://crispor.tefor.net/crispor.py) only report the first one:
+Query GATGGCGTTTAATCGCCTTCCGG at Chromosome:254218-254240 (Ecoli) reverse strand. Updated [CRISPOR with CRISPR-SE](http://renlab.sdsc.edu/CRISPR-SE/crispor/crispor.py) reported two off-targets, where origin [CRISPOR](http://crispor.tefor.net/crispor.py) only report the first one due to limits in heuristic algorithm:
 ```
 guide 1:    GATGGCGTTTAATCGCCTTC CGG
 off-target: GATGGCCATGAATGGCCTTC AGG
