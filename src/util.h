@@ -143,7 +143,8 @@ public:
             {
                 refFile(".ref");
                 refFile(".idx");
-                refFile(".mm", false);
+		if (!query)
+                	refFile(".mm", false);
             }
                 break;
             default:
