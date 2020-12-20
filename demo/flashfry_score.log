@@ -1,0 +1,17 @@
+22:34:03.070 [main] INFO  reference.binary.BinaryHeader$ - Loading header: enzyme type is SpCAS9
+22:34:03.073 [main] DEBUG reference.binary.BinaryHeader$ - Number of characters used to generate this lookup file: 7
+22:34:03.390 [main] INFO  modules.ScoreResults - Loading CRISPR objects (filtering out overflow guides).. 
+22:34:03.427 [main] INFO  modules.ScoreResults - adding score: Doench2014OnTarget
+22:34:03.436 [main] INFO  modules.ScoreResults - adding score: Doench2016CFDScore
+22:34:03.437 [main] INFO  modules.ScoreResults - adding score: dangerous
+22:34:03.444 [main] INFO  modules.ScoreResults - adding score: Hsu2013
+22:34:03.445 [main] INFO  modules.ScoreResults - adding score: closest
+22:34:03.446 [main] INFO  modules.ScoreResults - Scoring all guides...
+22:34:03.447 [main] INFO  modules.ScoreResults - Scoring with model Doench2014OnTarget
+22:34:03.464 [main] INFO  modules.ScoreResults - Scoring with model Doench2016CFDScore
+22:34:03.477 [main] INFO  modules.ScoreResults - Scoring with model dangerous
+22:34:03.481 [main] INFO  modules.ScoreResults - Scoring with model Hsu2013
+22:34:03.487 [main] INFO  modules.ScoreResults - Scoring with model closest
+22:34:03.488 [main] INFO  modules.ScoreResults - Aggregating results...
+22:34:03.498 [main] INFO  modules.ScoreResults - Writing annotated guides to the output file...
+22:34:03.507 [main] INFO  Main - Total runtime 0.68 seconds

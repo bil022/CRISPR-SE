@@ -1,0 +1,108 @@
+-- CRISPR-SE --
+
+Build ecoli index
+
+Search ecoli genome-wide gRNA
+Found ecoli.mm
+
+Convert to bam format
+
+samtools view ecoli.bam ecoli:1000-1005
+40b77d8107:GCAACAATCGGCGCGTAAAC	16	ecoli	986	30	20M	*	0	0	GTTTACGCGCCGATTGTTGC	IIIIIIIIIIIIIIIIIIII	EF:f:0.532925
+a337ae8d77:GCGCCGATTGTTGCGAGATT	0	ecoli	992	30	20M	*	0	0	GCGCCGATTGTTGCGAGATT	IIIIIIIIIIIIIIIIIIII	EF:f:0.043497
+3ea337ae8d:CGATTGTTGCGAGATTTGGA	0	ecoli	996	30	20M	*	0	0	CGATTGTTGCGAGATTTGGA	IIIIIIIIIIIIIIIIIIII	EF:f:0.699804
+810766016d:CGTCCAAATCTCGCAACAAT	16	ecoli	998	30	20M	*	0	0	ATTGTTGCGAGATTTGGACG	IIIIIIIIIIIIIIIIIIII	EF:f:0.179871
+
+-- CRISPOR --
+Run with bwa
+bwa aln
+Found crispor_input.sa
+
+bwa samse
+@SQ	SN:ecoli	LN:4641652
+@PG	ID:bwa	PN:bwa	VN:0.7.17-r1188	CL:bwa samse -n 60000 ecoli.fa crispor_input.sa crispor_input.fa
+ecoli:254221	16	ecoli	254221	12	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	XT:A:U	NM:i:0	X0:i:1	X1:i:13	XM:i:0	XO:i:0	XG:i:0	MD:Z:20	XA:Z:ecoli,+4564806,20M,4;ecoli,+3811590,20M,4;ecoli,+2143427,20M,4;ecoli,+2977513,20M,4;ecoli,-1675737,20M,4;ecoli,+3741225,20M,4;ecoli,-805488,20M,4;ecoli,-92861,20M,4;ecoli,-969859,20M,4;ecoli,+782981,20M,4;ecoli,-2349904,20M,4;ecoli,-1156520,20M,4;
+ecoli:254221	256	ecoli	4564806	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	256	ecoli	3811590	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	256	ecoli	2143427	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	256	ecoli	2977513	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	272	ecoli	1675737	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+ecoli:254221	256	ecoli	3741225	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	272	ecoli	805488	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+ecoli:254221	272	ecoli	92861	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+ecoli:254221	272	ecoli	969859	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+ecoli:254221	256	ecoli	782981	0	20M	*	0	0	GATGGCGTTTAATCGCCTTC	*	NM:i:4
+ecoli:254221	272	ecoli	2349904	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+ecoli:254221	272	ecoli	1156520	0	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	NM:i:4
+
+The bwa outputs will further be processed/filtered by CRISPOR web tools.
+
+Run with CRISPR-SE
+
+Search with CRISPR-SE
+@SQ	SN:ecoli	LN:4641652
+ecoli:254221	16	ecoli	254221	30	20M	*	0	0	GAAGGCGATTAAACGCCATC	IIIIIIIIIIIIIIIIIIII	EF:f:0.476010	NM:i:0
+ecoli:254221	0	ecoli	254221	30	20M	*	0	0	GAAGGCGATTAAACGCCATC	IIIIIIIIIIIIIIIIIIII	EF:f:0.454607	NM:i:4
+ecoli:254221	0	ecoli	782981	30	20M	*	0	0	GATGGCCATGAATGGCCTTC	IIIIIIIIIIIIIIIIIIII	EF:f:0.054218	NM:i:4
+
+The CRISPR-SE outputs will further be processed/filtered by CRISPOR web tools.
+
+-- FlashFry --
+22:33:39.595 [main] INFO  modules.BuildOffTargetDatabase - Discovering target sites in the input genome file...
+22:33:42.228 [main] INFO  reference.SimpleSiteFinder - Done looking for targets on chromosome ecoli...
+22:33:42.228 [main] INFO  reference.ReferenceEncoder$ - Done looking for targets...
+22:33:42.228 [main] INFO  modules.BuildOffTargetDatabase - Closing the temporary binary output files...
+22:33:48.539 [main] INFO  modules.BuildOffTargetDatabase - Creating the final binary database file...
+22:33:49.288 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin AATTGCT our 999 bin
+22:33:49.830 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin ACTTATT our 1999 bin
+22:33:50.061 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin AGTGTCT our 2999 bin
+22:33:50.333 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin ATTGCTT our 3999 bin
+22:33:50.606 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin CATGACT our 4999 bin
+22:33:50.862 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin CCTCGTT our 5999 bin
+22:33:51.158 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin CGTCCCT our 6999 bin
+22:33:51.376 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin CTTATTT our 7999 bin
+22:33:51.604 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin GATAGCT our 8999 bin
+22:33:51.882 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin GCTAATT our 9999 bin
+22:33:52.134 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin GGGTTCT our 10999 bin
+22:33:52.348 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin GTGTCTT our 11999 bin
+22:33:52.597 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin TAGTACT our 12999 bin
+22:33:52.839 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin TCGGGTT our 13999 bin
+22:33:53.122 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin TGGGCCT our 14999 bin
+22:33:53.356 [main] INFO  reference.binary.DatabaseWriter$ - Writing bin TTGCTTT our 15999 bin
+22:33:53.520 [main] INFO  Main - Total runtime 20.17 seconds
+
+FlashFry discover
+
+FlashFry score
+
+flashfry_input.output.scored
+contig	start	stop	target	context	overflow	orientation	Doench2014OnTarget	Doench2016CFDScore	dangerous_GC	dangerous_polyT	dangerous_in_genome	Hsu2013	basesDiffToClosestHit	closestHitCount	otCount
+ecoli	7	30	TGGCGCAATCTGCCGCATCGTGG	GCGCCGTGGCGCAATCTGCCGCATCGTGGATTGAG	OK	RVS	0.1414161053171064	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	10	33	CGATGCGGCAGATTGCGCCACGG	AATCCACGATGCGGCAGATTGCGCCACGGCGCTGT	OK	FWD	0.7948502134958817	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	21	44	ATTGCGCCACGGCGCTGTCCTGG	CGGCAGATTGCGCCACGGCGCTGTCCTGGCGAGTC	OK	FWD	0.010987618704510526	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	27	50	GACTCGCCAGGACAGCGCCGTGG	GCATGTGACTCGCCAGGACAGCGCCGTGGCGCAAT	OK	RVS	0.6699802302808024	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	36	59	TGTCCTGGCGAGTCACATGCAGG	CGGCGCTGTCCTGGCGAGTCACATGCAGGATTTTT	OK	FWD	0.33870071559179526	0.14814814850142446	NONE	NONE	IN_GENOME=1	99.96764745347261	4	2	3
+ecoli	39	62	AATCCTGCATGTGACTCGCCAGG	GGCAAAAATCCTGCATGTGACTCGCCAGGACAGCG	OK	RVS	0.14903358388764462	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+
+-- CRISPR-SE --
+
+Create flashfry context file
+
+Search off-targets sites
+
+Found flashfry_input.se.output
+
+Score with CRISPR-SE
+
+flashfry_input.se.output.scored
+contig	start	stop	target	context	overflow	orientation	Doench2014OnTarget	Doench2016CFDScore	dangerous_GC	dangerous_polyT	dangerous_in_genome	Hsu2013	basesDiffToClosestHit	closestHitCount	otCount
+ecoli	7	30	TGGCGCAATCTGCCGCATCGTGG	GCGCCGTGGCGCAATCTGCCGCATCGTGGATTGAG	OK	RVS	0.1414161053171064	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	10	33	CGATGCGGCAGATTGCGCCACGG	AATCCACGATGCGGCAGATTGCGCCACGGCGCTGT	OK	FWD	0.7948502134958817	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	21	44	ATTGCGCCACGGCGCTGTCCTGG	CGGCAGATTGCGCCACGGCGCTGTCCTGGCGAGTC	OK	FWD	0.010987618704510526	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	27	50	GACTCGCCAGGACAGCGCCGTGG	GCATGTGACTCGCCAGGACAGCGCCGTGGCGCAAT	OK	RVS	0.6699802302808024	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+ecoli	36	59	TGTCCTGGCGAGTCACATGCAGG	CGGCGCTGTCCTGGCGAGTCACATGCAGGATTTTT	OK	FWD	0.33870071559179526	0.14814814850142446	NONE	NONE	IN_GENOME=1	99.96764745347261	4	2	3
+ecoli	39	62	AATCCTGCATGTGACTCGCCAGG	GGCAAAAATCCTGCATGTGACTCGCCAGGACAGCG	OK	RVS	0.14903358388764462	0.0	NONE	NONE	IN_GENOME=1	100.0	UNK	0	1
+
+Compare flashfry_input.output.scored flashfry_input.se.output.scored
+Identical
+Done

@@ -1,0 +1,27 @@
+
+
+echo -- CRISPOR --
+if ! [ -e crispor_input.fa ]; then
+  echo -e ">ecoli:254221\nGATGGCGTTTAATCGCCTTC" > crispor_input.fa
+fi
+
+if ! [ -e ecoli.fa.bwt ]; then
+  bwa index ecoli.fa
+fi
+
+if ! [ -e ecoli.idx ]; then
+  ./se --index -r ecoli.fa
+fi
+
+bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 ecoli.fa crispor_input.fa > crispor_input.sa
+bwa samse -n 60000 ecoli.fa crispor_input.sa crispor_input.fa
+
+./se --index -sr crispor_input
+./se --build -m 5 -v -r ecoli -q crispor_input | ./crispor-se.pl --format | sort | ./crispor-se.pl --parse --ref ecoli --query crispor_input 
+
+echo -- FlashFry --
+if ! [ -e ecoli_crispor_input.fa ]; then
+  echo -e ">ecoli_crispor_input\nGCTCAATCCACGATGCGGCAGATTGCGCCACGGCGCTGTCCTGGCGAGTCACATGCAGGATTTTTGCCCA" > ecoli_crispor_input.fa
+fi
+
+

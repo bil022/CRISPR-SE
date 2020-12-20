@@ -1,0 +1,7 @@
+[bwa_aln_core] convert to sequence coordinate... 0.00 sec
+[bwa_aln_core] refine gapped alignments... 0.00 sec
+[bwa_aln_core] print alignments... 0.00 sec
+[bwa_aln_core] 1 sequences have been processed.
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa samse -n 60000 ecoli.fa crispor_input.sa crispor_input.fa
+[main] Real time: 0.061 sec; CPU: 0.007 sec

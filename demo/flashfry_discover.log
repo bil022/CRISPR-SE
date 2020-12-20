@@ -1,0 +1,61 @@
+22:34:01.409 [main] INFO  modules.OffTargetDiscovery - Reading the header....
+22:34:01.598 [main] INFO  reference.binary.BinaryHeader$ - Loading header: enzyme type is SpCAS9
+22:34:01.598 [main] DEBUG reference.binary.BinaryHeader$ - Number of characters used to generate this lookup file: 7
+22:34:01.926 [main] INFO  reference.SimpleSiteFinder - Done looking for targets on chromosome ecoli...
+22:34:01.927 [main] INFO  reference.ReferenceEncoder$ - Done looking for targets...
+22:34:01.927 [main] INFO  modules.OffTargetDiscovery - Setting up the guide recording for our 6 candidate guides....
+22:34:01.943 [main] INFO  modules.OffTargetDiscovery - Precomputing traversal over bins....
+22:34:02.048 [main] INFO  r.t.OrderedBinTraversalFactory - Precomputing bin lookup table for 6 guides
+22:34:02.050 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix AAAAAAA the 0th bin prefix we've looked at, total bin saturation = 0.0, proportion of bins seen = 0.0
+22:34:02.067 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix AACTTCA the 500th bin prefix we've looked at, total bin saturation = 0.027099609375, proportion of bins seen = 0.030517578125
+22:34:02.073 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix AATTGGA the 1000th bin prefix we've looked at, total bin saturation = 0.05572509765625, proportion of bins seen = 0.06103515625
+22:34:02.079 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix ACCTCTA the 1500th bin prefix we've looked at, total bin saturation = 0.0751953125, proportion of bins seen = 0.091552734375
+22:34:02.085 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix ACTTCAA the 2000th bin prefix we've looked at, total bin saturation = 0.09857177734375, proportion of bins seen = 0.1220703125
+22:34:02.086 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix AGCTACA the 2500th bin prefix we've looked at, total bin saturation = 0.12347412109375, proportion of bins seen = 0.152587890625
+22:34:02.088 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix AGTGTGA the 3000th bin prefix we've looked at, total bin saturation = 0.1512451171875, proportion of bins seen = 0.18310546875
+22:34:02.090 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix ATCGGTA the 3500th bin prefix we've looked at, total bin saturation = 0.177734375, proportion of bins seen = 0.213623046875
+22:34:02.092 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix ATTGGAA the 4000th bin prefix we've looked at, total bin saturation = 0.20513916015625, proportion of bins seen = 0.244140625
+22:34:02.094 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CACGCCA the 4500th bin prefix we've looked at, total bin saturation = 0.23089599609375, proportion of bins seen = 0.274658203125
+22:34:02.095 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CATGAGA the 5000th bin prefix we've looked at, total bin saturation = 0.25445556640625, proportion of bins seen = 0.30517578125
+22:34:02.097 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CCCCTTA the 5500th bin prefix we've looked at, total bin saturation = 0.27569580078125, proportion of bins seen = 0.335693359375
+22:34:02.098 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CCTCTAA the 6000th bin prefix we've looked at, total bin saturation = 0.29254150390625, proportion of bins seen = 0.3662109375
+22:34:02.100 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CGCCGCA the 6500th bin prefix we've looked at, total bin saturation = 0.3192138671875, proportion of bins seen = 0.396728515625
+22:34:02.101 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CGTCCGA the 7000th bin prefix we've looked at, total bin saturation = 0.34625244140625, proportion of bins seen = 0.42724609375
+22:34:02.103 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CTCCATA the 7500th bin prefix we've looked at, total bin saturation = 0.3704833984375, proportion of bins seen = 0.457763671875
+22:34:02.105 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix CTTCAAA the 8000th bin prefix we've looked at, total bin saturation = 0.39141845703125, proportion of bins seen = 0.48828125
+22:34:02.106 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GACATCA the 8500th bin prefix we've looked at, total bin saturation = 0.41845703125, proportion of bins seen = 0.518798828125
+22:34:02.108 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GATAGGA the 9000th bin prefix we've looked at, total bin saturation = 0.44635009765625, proportion of bins seen = 0.54931640625
+22:34:02.110 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GCCACTA the 9500th bin prefix we've looked at, total bin saturation = 0.46771240234375, proportion of bins seen = 0.579833984375
+22:34:02.111 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GCTACAA the 10000th bin prefix we've looked at, total bin saturation = 0.48663330078125, proportion of bins seen = 0.6103515625
+22:34:02.120 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GGCAACA the 10500th bin prefix we've looked at, total bin saturation = 0.5091552734375, proportion of bins seen = 0.640869140625
+22:34:02.121 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GGGTTGA the 11000th bin prefix we've looked at, total bin saturation = 0.5360107421875, proportion of bins seen = 0.67138671875
+22:34:02.122 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GTATGTA the 11500th bin prefix we've looked at, total bin saturation = 0.5587158203125, proportion of bins seen = 0.701904296875
+22:34:02.123 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix GTGTGAA the 12000th bin prefix we've looked at, total bin saturation = 0.5797119140625, proportion of bins seen = 0.732421875
+22:34:02.124 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TAATCCA the 12500th bin prefix we've looked at, total bin saturation = 0.602294921875, proportion of bins seen = 0.762939453125
+22:34:02.124 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TAGTAGA the 13000th bin prefix we've looked at, total bin saturation = 0.62841796875, proportion of bins seen = 0.79345703125
+22:34:02.125 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TCAGTTA the 13500th bin prefix we've looked at, total bin saturation = 0.652099609375, proportion of bins seen = 0.823974609375
+22:34:02.133 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TCGGTAA the 14000th bin prefix we've looked at, total bin saturation = 0.67413330078125, proportion of bins seen = 0.8544921875
+22:34:02.134 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TGAGGCA the 14500th bin prefix we've looked at, total bin saturation = 0.70013427734375, proportion of bins seen = 0.885009765625
+22:34:02.135 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TGGGCGA the 15000th bin prefix we've looked at, total bin saturation = 0.7296142578125, proportion of bins seen = 0.91552734375
+22:34:02.136 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TTAGATA the 15500th bin prefix we've looked at, total bin saturation = 0.75750732421875, proportion of bins seen = 0.946044921875
+22:34:02.137 [main] INFO  r.t.OrderedBinTraversalFactory - Comparing guides against bin prefix TTGGAAA the 16000th bin prefix we've looked at, total bin saturation = 0.781005859375, proportion of bins seen = 0.9765625
+22:34:02.138 [main] INFO  r.t.OrderedBinTraversalFactory - With 6 guides, and allowing 4 mismatch(es), we're going to scan 13144 target bins out of a total of 16384
+22:34:02.138 [main] INFO  modules.OffTargetDiscovery - scanning against the known targets from the genome with 6 guides
+22:34:02.138 [main] INFO  modules.OffTargetDiscovery - Starting seek traversal
+22:34:02.186 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 0th bin (AAAAAAG) with 98 guides, of a total bin count 13,144. 0.01259772 seconds/10K bins, executed 98,402 comparisons
+22:34:02.270 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 1,000th bin (ACACTAG) with 3 guides, of a total bin count 13,144. 0.084218406 seconds/10K bins, executed 166,095 comparisons
+22:34:02.314 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 2,000th bin (AGCGGCC) with 28 guides, of a total bin count 13,144. 0.042899704 seconds/10K bins, executed 215,428 comparisons
+22:34:02.335 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 3,000th bin (ATGACTG) with 17 guides, of a total bin count 13,144. 0.021467577 seconds/10K bins, executed 264,502 comparisons
+22:34:02.364 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 4,000th bin (CAGGTTG) with 75 guides, of a total bin count 13,144. 0.028937894 seconds/10K bins, executed 332,211 comparisons
+22:34:02.394 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 5,000th bin (CGACGGG) with 22 guides, of a total bin count 13,144. 0.029402923 seconds/10K bins, executed 387,544 comparisons
+22:34:02.427 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 6,000th bin (CTATCAG) with 36 guides, of a total bin count 13,144. 0.033482776 seconds/10K bins, executed 458,776 comparisons
+22:34:02.457 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 7,000th bin (GACTACC) with 14 guides, of a total bin count 13,144. 0.029783297 seconds/10K bins, executed 512,512 comparisons
+22:34:02.471 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 8,000th bin (GCTCCAA) with 7 guides, of a total bin count 13,144. 0.013352071 seconds/10K bins, executed 571,320 comparisons
+22:34:02.483 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 9,000th bin (GGTTGTG) with 36 guides, of a total bin count 13,144. 0.012107917 seconds/10K bins, executed 637,409 comparisons
+22:34:02.494 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 10,000th bin (TACCGTT) with 53 guides, of a total bin count 13,144. 0.011428655 seconds/10K bins, executed 690,768 comparisons
+22:34:02.505 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 11,000th bin (TCGCTTA) with 20 guides, of a total bin count 13,144. 0.010472241 seconds/10K bins, executed 738,676 comparisons
+22:34:02.516 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 12,000th bin (TGGTACT) with 18 guides, of a total bin count 13,144. 0.011259929 seconds/10K bins, executed 809,315 comparisons
+22:34:02.527 [main] INFO  reference.traverser.SeekTraverser$ - Comparing the 13,000th bin (TTTCGGC) with 63 guides, of a total bin count 13,144. 0.010977739 seconds/10K bins, executed 871,957 comparisons
+22:34:02.530 [main] INFO  modules.OffTargetDiscovery - Performed a total of 789,030 guide to target comparisons
+22:34:02.530 [main] INFO  modules.OffTargetDiscovery - Writing final output for 6 guides
+22:34:02.544 [main] INFO  Main - Total runtime 1.20 seconds
