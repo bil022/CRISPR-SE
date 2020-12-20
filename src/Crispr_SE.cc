@@ -101,7 +101,7 @@ public:
     // find an off-target
     inline void dump(uint32_t ref_seed, uint32_t ref_distal, int seed_diff, int distal_diff) {
         //snprintf(buf, BUF_SIZE, "[%lX]%05X:%05X-%05X:%05X=%d:%d", tid, seed, distal, ref_seed, ref_distal, seed_diff, distal_diff);
-        snprintf(buf, BUF_SIZE, "[%lX]%05x%05x-%05x%05x=%d:%d", tid, seed, distal, ref_seed, ref_distal&MASK, seed_diff, distal_diff);
+        snprintf(buf, BUF_SIZE, "[%lX]%05X%05X-%05X%05X=%d:%d", tid, seed, distal, ref_seed, ref_distal&MASK, seed_diff, distal_diff);
         append();
     }
 };
