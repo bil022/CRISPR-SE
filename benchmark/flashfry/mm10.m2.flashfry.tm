@@ -1,0 +1,1 @@
+281.85 real,267.93 user,46.22 sys,111% CPU,0 mem(K): java -Xmx32g -jar /projects/ps-renlab/bil022/CRISPR/CREST-HPC/refD/tools/flashfry/FlashFry-assembly-1.9.3.jar discover --positionOutput --maxMismatch=2 --database flashfry/mm10_ref_db --fasta /dev/fd/63 --output flashfry/mm10.m2.flashfry

@@ -1,0 +1,1 @@
+4474.65 real,3874.80 user,751.99 sys,103% CPU,0 mem(K): /projects/ps-renlab/bil022/CRISPR/CREST-HPC/refD/rev/crisflash/crisflash -g ref/hg38.fa -s ref/hg38.m2.fa -o crisflash/hg38.m2.crisflash -m 3 -t 8 -C

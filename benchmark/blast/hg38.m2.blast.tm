@@ -1,0 +1,1 @@
+19344.04 real,123604.52 user,24.61 sys,639% CPU,0 mem(K): ../bin/ncbi-blast-2.9.0+/bin/blastn -task blastn-short -ungapped -num_threads 8 -db ../bin/hg38 -query /dev/fd/63 -evalue 1 -outfmt 7 delim=	 qseqid length mismatch evalue qstart qend sseqid sstart send sstrand sseq

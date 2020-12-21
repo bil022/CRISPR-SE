@@ -1,0 +1,12 @@
+ecoli.m1.fa.gz 6328
+ecoli.m2.fa.gz 10792
+ecoli.m3.fa.gz 59068
+ecoli.m4.fa.gz 344904
+hg38.m1.fa.gz 74872192
+hg38.m2.fa.gz 228099648
+hg38.m3.fa.gz 135306812
+hg38.m4.fa.gz 1527988
+mm10.m1.fa.gz 63343182
+mm10.m2.fa.gz 203378068
+mm10.m3.fa.gz 139960644
+mm10.m4.fa.gz 1752224

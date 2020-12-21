@@ -1,0 +1,9 @@
+nohup: ignoring input
+Died at ./bowtie2.pl line 26, <STDIN> line 4.
+0 0 0 0
+Died at ./bowtie2.pl line 26, <STDIN> line 4.
+0 0 0 0
+Died at ./bowtie2.pl line 26, <STDIN> line 4.
+0 0 0 0
+Died at ./bowtie2.pl line 26, <STDIN> line 4.
+0 0 0 0
