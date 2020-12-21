@@ -65,6 +65,7 @@ $ bwa samse -n 60000 ecoli.fa crispor_input.sa crispor_input.fa | ./xa2multi.pl
 ```
 
 >ecoli:254221	16	ecoli	254221	12	20M	*	0	0	GAAGGCGATTAAACGCCATC	*	XT:A:U	NM:i:0	X0:i:1	X1:i:13	XM:i:0	XO:i:0	XG:i:0	MD:Z:20	XA:Z:ecoli,+4564806,20M,4;ecoli,+3811590,20M,4;ecoli,+2143427,20M,4;ecoli,+2977513,20M,4;ecoli,-1675737,20M,4;ecoli,+3741225,20M,4;ecoli,-805488,20M,4;ecoli,-92861,20M,4;ecoli,-969859,20M,4;ecoli,+782981,20M,4;ecoli,-2349904,20M,4;ecoli,-1156520,20M,4;<br/>
+>...<br/>
 
 2. Replace with CRISPR-SE
 ```
@@ -137,7 +138,7 @@ $ java -Xmx4g -jar FlashFry.jar \
 >ecoli   7       30      TGGCGCAATCTGCCGCATCGTGG GCGCCGTGGCGCAATCTGCCGCATCGTGGATTGAG     OK      RVS     0.1414161053171064      0.0     NONE    NONE    IN_GENOME=1     100.0   UNK     0       1<br/>
 
 
-### B. Use CRISPR-SE
+### B. Use CRISPR-SE for faster off-targets sites search
 
 1. Build index for user input
 ```
@@ -165,7 +166,7 @@ $ ./se --build -m 5 -v -r ecoli -q flashfry_input | ./flashfry.pl --format | sor
 >ecoli	7	30	TGGCGCAATCTGCCGCATCGTGG	GCGCCGTGGCGCAATCTGCCGCATCGTGGATTGAG	OK	RVS	1	TGGCGCAATCTGCCGCATCGTGG_1_0<br/>
 >...<br/>
 
-5. Run FlashFry for scoring
+5. Use FlashFry for scoring
 ```
 $ java -Xmx4g -jar FlashFry.jar \
  score \
