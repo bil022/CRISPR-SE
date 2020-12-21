@@ -14,13 +14,13 @@ fa/$ref.m$m.fasta.gz
 ## Scripts:
 ```
 # run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
-run.sh
+./run.sh
 # run CRISPR-SE
-crispr-se/run.sh
+./crispr-se/run.sh
 # run CrisFlash
-run_crisflash.sh
+./run_crisflash.sh
 # run FlashFry
-run_flashfry.sh
+./run_flashfry.sh
 
 # Calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
 $prog/$prog.sh
