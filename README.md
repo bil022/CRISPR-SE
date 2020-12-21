@@ -11,7 +11,7 @@ cd CRISPR-SE
 make
 ```
 
-## *The following scripts and required files are included in `demo` folder.*
+## *The following scripts and required files are included in [demo](demo/) folder.*
 
 ## Inputs:
 ```
