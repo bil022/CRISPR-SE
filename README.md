@@ -1,5 +1,5 @@
 # CRISPR-SE
-## CRISPR-SE is an accurate and fast guide RNA off-target sites search engine for CRISPR design.
+## CRISPR-SE is an accurate and fast guide RNA off-target sites search engine for CRISPR design. *The scripts and full datasets are included in [demo](demo/) and [benchmark](benchmark/) folder.*
 
 ## Source code:
 <!--
@@ -10,8 +10,6 @@ git clone https://github.com/bil022/CRISPR-SE
 cd CRISPR-SE
 make
 ```
-
-## *The following scripts and required files are included in [demo](demo/) and [benchmark](benchmark/) folder.*
 
 ## Inputs:
 ```
