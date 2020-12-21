@@ -1,5 +1,5 @@
 # CRISPR-SE
-## CRISPR-SE is an accurate and fast CRISPR search engine.
+## CRISPR-SE is an accurate and fast guide RNA off-target sites search engine for CRISPR design.
 
 ## Source code:
 <!--
