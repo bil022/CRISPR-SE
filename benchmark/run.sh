@@ -25,7 +25,6 @@ for ref in mm10 hg38; do
     fi
     
     if ! [ -e bowtie2/$ref.m$m.bowtie2.tm ]; then # -a => -k 20
-      echo "../bin/bowtie2 -a -x ../bin/$ref -k 100 -N 1 -f <(zcat fa/$ref.m$m.fasta.gz|filt) -L 12 2> bowtie2/$ref.m$m.bowtie2.log | gzip > bowtie2/$ref.m$m.bowtie2.gz"
       $time -f "%e real,%U user,%S sys,%P CPU,%K mem(K): %C" -o bowtie2/$ref.m$m.bowtie2.tm bowtie2 -a -x ../bin/$ref -k 100 -N 1 -f <(zcat fa/$ref.m$m.fasta.gz|filt) -L 12 2> bowtie2/$ref.m$m.bowtie2.log | gzip > bowtie2/$ref.m$m.bowtie2.gz & sleep 1
     fi
 

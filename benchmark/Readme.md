@@ -1,6 +1,6 @@
 # CRISPR-SE benchmark:
 
-The CRISPR-SE benchmark evaluate the accuracies and speeds of existing mismatch search engines for CRISPR design. We benchmarked 8 search methods: BLAST, BLAT, Bowtie, Bowtie2, BWA, FlashFry, CrisFlash and CRISPR-SE. The full dataset is available http://renlab.sdsc.edu/CRISPR-SE/benchmark/ and also submitted to Zenodo.
+The CRISPR-SE benchmark evaluate the accuracies and speeds of existing mismatch search engines for CRISPR design. We benchmarked 8 search methods: BLAST, BLAT, Bowtie, Bowtie2, BWA, FlashFry, CrisFlash and CRISPR-SE. The full dataset is available at [benchmark](benchmark/) and also submitted to Zenodo.
 
 ## Prerequisites:
 The benchmark was performed in a Linux platform, the programs should be installed and excutable as: blastn, blat, bowtie, bowtie2, bwa, FlashFry-assembly-1.9.3.jar(provided), crisflash and se. Otherwise a path should be provided for the executables.
@@ -12,6 +12,7 @@ fa/$ref.m$m.fasta.gz
 ```
 
 ## Scripts:
+run `make` to re-run all test cases. In detail:
 ```
 # run BLAST, BLAT, Bowtie, Bowtie2 and BWA 
 ./run.sh
@@ -22,7 +23,7 @@ fa/$ref.m$m.fasta.gz
 # run FlashFry
 ./run_flashfry.sh
 
-# Calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
+# To calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
 $prog/$prog.sh
 ```
 ## Outputs:
