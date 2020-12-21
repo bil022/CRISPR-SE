@@ -23,6 +23,9 @@ run `make` to re-run all test cases. In detail:
 # run FlashFry
 ./run_flashfry.sh
 
+# In each script, we use the following template to run the program:
+$time -f "%e real,%U user,%S sys,%P CPU,%K mem(K): %C" -o $prog/$ref.m$m.$prog.tm $prog <paramemters> $ref <(zcat fa/$ref.m$m.fasta.gz|filt)
+
 # To calculate the accuracies, #prog includes BLAST, BLAT, Bowtie, Bowtie2, BWA, CRISPR-SE, CrisFlash and FlashFry
 $prog/$prog.sh
 ```
@@ -30,7 +33,7 @@ $prog/$prog.sh
 ```
 # The total number of used CPU times
 $prog/$ref.m$m.$prog.tm
-# The accuracies
+# The accuracies are evaluated by each $prog/$prog.sh 
 $prog/$prog.txt
 ```
 ## Example:
