@@ -55,7 +55,7 @@ $ samtools view ecoli.bam ecoli:1000-1005
 >a337ae8d77:GCGCCGATTGTTGCGAGATT	0	ecoli	992	30	20M	*	0	0	GCGCCGATTGTTGCGAGATT	IIIIIIIIIIIIIIIIIIII	EF:f:0.043497<br/>
 >...
 
-## How to replacing CRISPOR search engine:
+## How to replace CRISPOR search engine:
 1. Inteteral processing in CRISPOR:
 ```
 $ bwa aln -o 0 -m 1980000 -n 4 -k 4 -N -l 20 ecoli.fa crispor_input.fa > crispor_input.sa
